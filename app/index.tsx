@@ -3,8 +3,7 @@ import { FlatList, View,Text,Image } from 'react-native';
 import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import MangaCover from '@/components/homecomponents/MangaCover';
-import { mangatest } from '@/components/homecomponents/test';
+
 import Header from '@/components/header/header';
 import NavigationFooter from './footer';
 import { StatusBar } from 'expo-status-bar';
@@ -18,7 +17,7 @@ export default function Index() {
     const [isLoggedIn,setIsLoggedIn] = useState(false)
     const check_loggeed_in =async () => {
         const access_token = await AsyncStorage.getItem("access_token")
-        if (access_token){
+        if (!access_token){ // This should be just access_token but for testing puproses
             setIsLoggedIn(true)
         }
         else{

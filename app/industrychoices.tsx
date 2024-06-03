@@ -3,8 +3,7 @@ import { FlatList, View,Text,Image, Alert } from 'react-native';
 import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import MangaCover from '@/components/homecomponents/MangaCover';
-import { mangatest } from '@/components/homecomponents/test';
+
 import Header from '@/components/header/header';
 import NavigationFooter from './footer';
 import { StatusBar } from 'expo-status-bar';
@@ -75,11 +74,13 @@ export default function IndustryChoices() {
         let personal_info_data = JSON.parse(personal_info)
         const personal_info_json = personal_info_data.map((items:any) =>{
             let dict:any = {}
-            dict[items.label.toLowerCase().replace(" ","_")] = items.value
+            dict[items.label.toLowerCase().replaceAll(" ","_")] = items.value
             return(dict)})
         if (industry.value !== "" && career.value !== "" && studypref.value !== "" && studydays.value !== ""){
             console.log(industry.value,career.value,studypref.value,studydays.value)
             console.log(personal_info_json)
+            let final_json = {"personal_info":JSON.stringify(personal_info_json),"interests_info":JSON.stringify({"industry":industry.value,"career":career.value,"studypref":studypref.value,"studydays":studydays.value})}
+            router.push({ pathname: "/createyourpassword", params: final_json})
             // Store info in DB.
             // Ten navigate to main page
         }

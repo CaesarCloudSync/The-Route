@@ -2,7 +2,7 @@ import { View } from "react-native";
 import NavigationFooter from "./footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import MangaCover from "@/components/homecomponents/MangaCover";
+
 import VolumeCover from "@/components/mangapagecomponents/volumecover";
 import { FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";

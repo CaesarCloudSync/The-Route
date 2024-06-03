@@ -13,19 +13,49 @@ import { TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { TextInput } from 'react-native';
 import { useNavigation } from 'expo-router';
-export default function Index() {
+import { useLocalSearchParams } from 'expo-router';
+export default function CreateYourPassword() {
     const netInfo = useNetInfo();
     const router = useRouter();
+    const {personal_info,interests_info} = useLocalSearchParams<any>();
     const [isLoggedIn,setIsLoggedIn] = useState(false);
-    const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [confirmpassword,setConfirmPassword] = useState("");
     const [isTyping,setIsTyping] = useState(false)
     const navigate = useNavigation();
-    const login =async () => {
+    const signup=async () => {
         // login here
-        if (email !== "" && password !== ""){
-          console.log("login here",email,password)
+        if (password !== "" && confirmpassword !== ""){
+          console.log("login here",password,password)
+          if (confirmpassword !== password){
+            Alert.alert("Passwords are not the same.")
+          }
+          else{
+            // Turn key email_address to email
+            let signup_info = JSON.parse(personal_info)
+    
+            let final_json  = {"first_name": signup_info[0]["first_name"], "last_name": signup_info[1]["last_name"], "email": signup_info[2]["email_address"], "date_of_birth": signup_info[3]["date_of_birth"],"password":password}
+            
+            console.log(final_json)
+            
+            
+            const response = await axios.post("http://192.168.0.22:8080/api/v1/signupapi",final_json)
+
+            let result = response.data
+            console.log(result)
+            if ("access_token" in result){
+                await AsyncStorage.setItem("access_token",result.access_token)
+                router.push("/qualifications")
+                //router.push("/mainhome")
+
+            }
+            else if ("message" in result){
+                Alert.alert(result.message)
+            }
+
+          }
         }
+
     
 
     }
@@ -47,10 +77,10 @@ if (netInfo.isInternetReachable === true  ){
         </View>
         <View style={{flex:0.2,padding:30,gap:10}}>
             <View style={{}}>
-                <Text style={{fontSize:25}}>Log in</Text>
+                <Text style={{fontSize:25}}>Create Your Password</Text>
             </View>
             <TextInput
-            placeholder='Email'
+            placeholder='*Password'
         style={{
             height: 40,
             margin: 12,
@@ -59,30 +89,32 @@ if (netInfo.isInternetReachable === true  ){
             borderRadius:5
           
           }}
+          secureTextEntry={true} 
           onTouchEnd={() =>{setIsTyping(true)}}
-          onEndEditing={() =>{setIsTyping(false)}}
-          placeholderTextColor="black" 
-            onChangeText={setEmail}
-            value={email}
-        />
-                    <TextInput
-            placeholder='Password'
-        style={{
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            borderRadius:5
-          
-          }}
-          onTouchEnd={() =>{setIsTyping(true)}}
-          onEndEditing={() =>{setIsTyping(false)}}
+          onEndEditing={() =>{}}
           placeholderTextColor="black" 
             onChangeText={setPassword}
             value={password}
         />
-        <TouchableOpacity onPress={() =>{login()}} style={{backgroundColor:"#3ec7f3",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
-                    <Text style={{color:"white"}}>Login</Text>
+                    <TextInput
+            placeholder='*Confirm your password'
+        style={{
+            height: 40,
+            margin: 12,
+            borderWidth: 1,
+            padding: 10,
+            borderRadius:5
+          
+          }}
+          secureTextEntry={true} 
+          onTouchEnd={() =>{setIsTyping(true)}}
+          onEndEditing={() =>{setIsTyping(false)}}
+          placeholderTextColor="black" 
+            onChangeText={setConfirmPassword}
+            value={confirmpassword}
+        />
+        <TouchableOpacity onPress={() =>{signup()}} style={{backgroundColor:"#3ec7f3",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
+                    <Text style={{color:"white"}}>Create Your Password</Text>
             </TouchableOpacity>
 
 
