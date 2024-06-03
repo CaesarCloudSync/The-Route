@@ -45,8 +45,8 @@ export default function CreateYourPassword() {
             console.log(result)
             if ("access_token" in result){
                 await AsyncStorage.setItem("access_token",result.access_token)
-                router.push("/qualifications")
-                //router.push("/mainhome")
+                //router.push("/qualifications")
+                router.push("/mainhome")
 
             }
             else if ("message" in result){
