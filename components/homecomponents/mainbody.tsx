@@ -9,7 +9,7 @@ export default function MainBody({style,qualifications}:any){
                 {qualifications &&
                 <FlatList<QualificationItemInterface>
                 data={qualifications}
-                renderItem={({ item }) => <QualItem qualid={item.qualid} qual_name={item.qual_name} qual_icon={item.qual_icon} />}
+                renderItem={({ item }) => <QualItem qualuuid={item.qualuuid} qual_name={item.qual_name} qual_icon={item.qual_icon} />}
       
                 contentContainerStyle={{ gap: 30 }}
 

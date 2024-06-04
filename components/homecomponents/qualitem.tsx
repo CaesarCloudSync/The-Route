@@ -1,7 +1,7 @@
 import { Text, View ,FlatList} from "react-native"
 import { QualificationItemInterface } from "./qualinterfaces"
 
-export default function QualItem({qualid,qual_name,qual_icon}:QualificationItemInterface){
+export default function QualItem({qualuuid,qual_name,qual_icon}:QualificationItemInterface){
 
 
     return(

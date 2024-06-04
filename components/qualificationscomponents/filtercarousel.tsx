@@ -1,17 +1,17 @@
 import { Text, View ,FlatList} from "react-native"
 import FilterItem from "./filteritem"
 import { FilterItemInterface } from "./qualinterfaces"
-export default function FilterCarousel({style}:any){
-    const careers = [{"label":"React","value":"react"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]
+export default function FilterCarousel({style,careers,chosen_career}:any){
+
     return(
     <View style={[style,{padding:"2%"}]}>
  
            
            {careers &&
                 <FlatList<FilterItemInterface>
-                style={{flex:1.5}}
+                style={{flex:2}}
                 data={careers}
-                renderItem={({ item }) => <FilterItem label={item.label} value={item.value} />}
+                renderItem={({ item ,index}) => <FilterItem index={index} label={item.label} value={item.value} />}
                 horizontal={true}
                 scrollEnabled
                 showsHorizontalScrollIndicator={false}
@@ -21,8 +21,8 @@ export default function FilterCarousel({style}:any){
 
 
             />}
-            <View style={{flex:0.8}} >
-                <Text>Results: Result</Text>
+            <View style={{flex:1.3,justifyContent:"center",alignItems:"center"}} >
+                <Text style={{marginTop:10,fontWeight:"bold",fontSize:15}}>{chosen_career}</Text>
 
             </View>
                 

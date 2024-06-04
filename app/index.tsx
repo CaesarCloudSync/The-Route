@@ -18,7 +18,8 @@ export default function Index() {
     const check_loggeed_in =async () => {
         const access_token = await AsyncStorage.getItem("access_token")
         if (access_token){ // This should be just access_token but for testing puproses
-            router.push("/mainhome")
+            router.push("/qualifications")
+            //router.push("/mainhome")
             setIsLoggedIn(true)
         }
         else{

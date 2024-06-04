@@ -3,7 +3,7 @@ export interface FilterItemInterface {
     value:string
 }
 export interface QualificationItemInterface{
-    qualid:string;
+    qualuuid:string;
     qual_name:string;
     qual_icon:string;
 }
