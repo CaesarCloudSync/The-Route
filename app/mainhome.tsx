@@ -6,6 +6,7 @@ import { Text,View } from 'react-native';
 import Header from '@/components/homecomponents/header';
 import MainBody from '@/components/homecomponents/mainbody';
 import ProgressTracker from '@/components/homecomponents/progresstracker';
+import StatusChoicesDropDown from '@/components/homecomponents/statuschoicesdropdown';
 export default function TabOneScreen() {
   const qualifications = [{"qualid":"qual-1234","qual_name":"Python Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"}]
 
@@ -18,10 +19,10 @@ export default function TabOneScreen() {
           flexDirection: 'column',
         },
       ]}>
-      <Header style={{flex: 0.2, backgroundColor: 'red'}} />
-      <ProgressTracker progress={90} style={{flex: 0.07, backgroundColor: 'yellow'}} />
+      <Header style={{flex: 0.1}} />
+      <ProgressTracker progress={90} style={{flex: 0.07}} />
       
-      <View style={{flex: 0.03,backgroundColor: 'blue',justifyContent:"center",alignItems:"center"}}>
+      <View style={{flex: 0.03,justifyContent:"center",alignItems:"center"}}>
         <Text>(chosen career path)</Text>
 
 
@@ -34,9 +35,12 @@ export default function TabOneScreen() {
         <Text>Skillset Learning</Text>
       </View>
       <View style={{justifyContent:"center",alignItems:"center",gap:20}} >
-        {[{"trackitemid":"1245","trackitemname":"Python"},{"trackitemid":"1245","trackitemname":"React"},{"trackitemid":"1245","trackitemname":"Python"}].map(() =>{
+        {[{"skillsetuuid":"1245","label":"Python","value":"python","status":"done"},{"skillsetuuid":"1245","label":"React","value":"react","status":"doing"},{"skillsetuuid":"1245","label":"FastAPI","value":"fastapi","status":"not done"}].map((item,index) =>{
           return(
-            <View style={{width:"80%",height:60,backgroundColor:"red"}}>
+            <View style={{width:"90%",height:60,backgroundColor:index % 2 === 1 ? "black": "#6ea1b1",borderRadius:5,flexDirection:"row",alignItems:"center"}}>
+              <Text style={{flex:0.95,marginLeft:"10%",color:index % 2 === 1 ? "white": "black"}}>{item.label}</Text>
+
+              <StatusChoicesDropDown status={item.status} />
 
             </View>
           )
@@ -49,9 +53,9 @@ export default function TabOneScreen() {
         <Text>Qualification/Uni/Bootcamps/courses</Text>
       </View>
       <View style={{justifyContent:"center",alignItems:"center",gap:20}} >
-        {[1,2,3,4].map(() =>{
+        {[1,2,3,4].map((item,index) =>{
           return(
-            <View style={{width:"80%",height:60,backgroundColor:"red"}}>
+            <View style={{width:"90%",height:60,backgroundColor:index % 2 === 1 ? "black": "#6ea1b1",borderRadius:5}}>
 
             </View>
           )
@@ -64,9 +68,9 @@ export default function TabOneScreen() {
         <Text>Career/Job/Consulting</Text>
       </View>
       <View style={{justifyContent:"center",alignItems:"center",gap:20}} >
-        {[1,2,3,4].map(() =>{
+        {[1,2,3,4].map((item,index) =>{
           return(
-            <View style={{width:"80%",height:60,backgroundColor:"red"}}>
+            <View style={{width:"90%",height:60,backgroundColor:index % 2 === 1 ? "black": "#6ea1b1",borderRadius:5}}>
 
             </View>
           )

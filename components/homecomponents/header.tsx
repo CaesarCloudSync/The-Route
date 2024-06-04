@@ -5,13 +5,13 @@ export default function Header({style}:any){
             <View style={{flex:1,alignItems:"center",flexDirection:"row",padding:20}}>
                 <View style={{width:20,flex:3}}>
                     <View>
-                        <Text style={{color:"white"}}>Logo</Text>
+                        <Text style={{color:"black"}}>Logo</Text>
                     </View>
                 </View>
 
                 <View style={{width:20,flex:0.5}}>
                     <View>
-                        <Text style={{color:"white",fontSize:9}}>Bookmarks</Text>
+                        <Text style={{color:"black",fontSize:9}}>Bookmarks</Text>
                     </View>
                 </View>
              
