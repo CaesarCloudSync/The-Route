@@ -39,14 +39,14 @@ export default function CreateYourPassword() {
             console.log(final_json)
             
             
-            const response = await axios.post("http://192.168.0.22:8080/api/v1/signupapi",final_json)
+            const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/signupapi",final_json)
 
             let result = response.data
             console.log(result)
             if ("access_token" in result){
                 await AsyncStorage.setItem("access_token",result.access_token)
-                //router.push("/qualifications")
-                router.push("/mainhome")
+                router.push("/qualifications")
+                //router.push("/mainhome")
 
             }
             else if ("message" in result){

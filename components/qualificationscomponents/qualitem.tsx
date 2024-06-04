@@ -3,10 +3,10 @@ import { QualificationItemInterface } from "./qualinterfaces"
 import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-export default function QualItem({qualuuid,qual_name,institution,qual_icon,online_freq,in_person_freq,course_length,earning_potential_lower,earning_potential_upper,earning_potential_description,description}:any){ // :QualificationItemInterface
+export default function QualItem({qualuuid,qual_name,institution,qual_icon,online_freq,in_person_freq,course_length,earning_potential_lower,earning_potential_upper,earning_potential_description,description,link}:any){ // :QualificationItemInterface
     const router = useRouter();
     const navqualinfopage = () =>{
-        router.push({ pathname: "/qualinfo", params: {"qual_info_param":JSON.stringify({qualuuid:qualuuid,qual_name:qual_name,institution:institution,qual_icon:qual_icon,online_freq:online_freq,in_person_freq:in_person_freq,course_length:course_length,earning_potential_lower:earning_potential_lower,earning_potential_upper:earning_potential_upper,earning_potential_description:earning_potential_description,description:description})}})
+        router.push({ pathname: "/qualinfo", params: {"qual_info_param":JSON.stringify({qualuuid:qualuuid,qual_name:qual_name,institution:institution,qual_icon:qual_icon,online_freq:online_freq,in_person_freq:in_person_freq,course_length:course_length,earning_potential_lower:earning_potential_lower,earning_potential_upper:earning_potential_upper,earning_potential_description:earning_potential_description,description:description,link:link})}})
 
     }
 

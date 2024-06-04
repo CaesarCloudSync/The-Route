@@ -4,6 +4,9 @@ import { useState } from "react";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "expo-router";
 import { TouchableOpacity } from "react-native";
+import * as Linking from 'expo-linking';
+
+
 export default function QualInfo(){
     const qual_info_param:any = useLocalSearchParams();
     const navigation = useNavigation();
@@ -29,13 +32,13 @@ export default function QualInfo(){
                 <Text style={{color: 'white',fontSize: 20,lineHeight: 24,fontWeight: 'bold',backgroundColor: '#000000c0',maxWidth:180,padding:10}}>{qual_info.institution}</Text>
             </View>
             </ImageBackground>
-            <ScrollView style={{flex:1}}>
-            <View style={{flex:0.1,margin:20,backgroundColor:"#d9d9d9",padding:20}}>
+            <ScrollView style={{flex:1,gap:20}}>
+            <View style={{flex:0.04,margin:10,padding:10}}>
                 <Text style={{fontSize:15,fontWeight:"bold"}}>Job Role:</Text>
                 <Text >{qual_info.qual_name}</Text>
      
             </View>
-            <View style={{flex:0.1,margin:20,backgroundColor:"#d9d9d9",padding:20}}>
+            <View style={{flex:0.1,margin:10,padding:10}}>
                 <Text style={{fontSize:15,fontWeight:"bold"}}>Schedule:</Text>
             {qual_info.online_freq !== "" &&
                 <Text style={{color:"black"}}>
@@ -52,7 +55,7 @@ export default function QualInfo(){
                 </Text>
 
             </View>
-            <View style={{flex:1,margin:20,backgroundColor:"#d9d9d9",padding:20,gap:10}}>
+            <View style={{flex:1,margin:10,padding:10,gap:10}}>
             <Text style={{fontSize:15,fontWeight:"bold"}}>Earning Potential</Text>
             <Text style={{color:"black"}}>{qual_info.earning_potential_lower} - £{qual_info.earning_potential_upper} /yr {qual_info.earning_potential_description !== "" && `(${qual_info.earning_potential_description})`}</Text>
             <Text style={{fontWeight:"bold"}}>About the Qualification</Text>
@@ -61,6 +64,13 @@ export default function QualInfo(){
             </Text>
             </View>
             </ScrollView>
+            <View style={{position:"absolute",bottom:0,width:"100%",height:50,justifyContent:"center",alignItems:"center"}}>
+                <TouchableOpacity onPress={() =>{Linking.openURL(qual_info.link);}} style={{width:200,height:30,backgroundColor:"#36b2db",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
+                    <Text style={{color:"white",fontWeight:"bold",fontSize:15}}>Apply</Text>
+
+                </TouchableOpacity>
+
+            </View>
 
 
         </View>
