@@ -26,46 +26,10 @@ export default function IndustryChoices() {
     const [career,setCareer] = useState({"label":"","value":""});
     const [studypref,setStudyPref] = useState({"label":"","value":""});
     const [studydays,setStudyDays] = useState({"label":"","value":""});
-    const industrychoices = [
-        {"label":"Gaming","value":"gaming"},
-        {"label":"Finance","value":"finance"},
-        {"label":"Technology","value":"tech"},
-        
-      ];
-    const careerchoices :any= {"gaming":
-    [
-        {"label":"Game developer","value":"game_developer"},
-        {"label":"Game designer","value":"game_designer"},
-        {"label":"Games content creator","value":"game_content_creator"},
-        {"label":"Game tester","value":"game_tester"},
-        {"label":"Market research","value":"marhet_research"},
-        {"label":"Games blogger","value":"game_blogger"}
-        
-      ],
-    "finance":
-    [
-        {"label":"Accountant","value":"accountant"},
-        
-      ]
-      ,
-      "tech":
-      [
-        {"label":"Software Developer","value":"software_developer"},
-        {"label":"Software Designer","value":"software_designer"},
-
-        
-      ]
-};
-    const studyprefchoices = [
-        {"label":"Online","value":"online"},
-        {"label":"In person","value":"in_person"},
-        {"label":"Hybrid","value":"hybrid"}
-    ]
-    const studydaychoices = [
-        {"label":"1 Study Days","value":"1"},
-        {"label":"3 Study Days","value":"3"},
-        {"label":"5 Study Days","value":"5"}
-    ]
+    const [industrychoices, setIndustryChoices] = useState([])
+    const [careerchoices ,setCareerChoices] = useState<any>({})
+    const  [studyprefchoices,setStudyPrefChoices] = useState([])
+    const [studydaychoices,setStudyDaysChoices] = useState([]);
     const navigate = useNavigation();
 
     const next_page =async () => {
@@ -88,9 +52,24 @@ export default function IndustryChoices() {
 
     }
     
-
-
+const getindustrychoices =async () => {
+    const response = await axios.get("http://172.20.10.3:8080/api/v1/getindustrychoices")
+    let result = response.data
+    let careers = result.careers
+    let industrys = result.industrys
+    let studypref = result.studyprefs
+    let studydays = result.studydays
+    setCareerChoices(careers)
+    setIndustryChoices(industrys)
+    setStudyPrefChoices(studypref)
+    setStudyDaysChoices(studydays)
+    console.log(result)
+}
+useEffect(() =>{
+    getindustrychoices()
+},[])
 if (netInfo.isInternetReachable === true  ){
+
   return (
     <View style={{flex:1,backgroundColor:"white"}}>
         <StatusBar  hidden/>
@@ -103,11 +82,11 @@ if (netInfo.isInternetReachable === true  ){
 
         <View style={{flex:1,padding:30,gap:10,alignItems:"center"}}>
             <View style={{flex:0.04}}>
-                <Text style={{fontSize:15,fontWeight:"bold"}}>Welcome to BTDTechConnect</Text>
+                <Text style={{fontSize:15,fontWeight:"bold"}}>Welcome to The Route</Text>
             </View>
             <View style={{flex:0.05,flexDirection:"row",gap:10}}>
                 <View style={{width:50,height:10,backgroundColor:"grey",borderRadius:30}}></View>
-                <View style={{width:50,height:10,backgroundColor:"#3ec7f3",borderRadius:30}}></View>
+                <View style={{width:50,height:10,backgroundColor:"#61edae",borderRadius:30}}></View>
              
 
             </View>
@@ -140,7 +119,7 @@ if (netInfo.isInternetReachable === true  ){
             </View>
 
  
-            <TouchableOpacity onPress={() =>{next_page()}}   style={{backgroundColor:"#3ec7f3",width:"90%",justifyContent:"center",alignItems:"center",borderRadius:50}}>
+            <TouchableOpacity onPress={() =>{next_page()}}   style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",borderRadius:50}}>
                     <Text style={{color:"white",padding:20,fontWeight:"bold"}}>Next</Text>
             </TouchableOpacity>
 

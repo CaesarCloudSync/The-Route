@@ -14,7 +14,7 @@ export default function QualItem({qualuuid,qual_name,institution,qual_icon,onlin
     <TouchableOpacity onPress={() =>{navqualinfopage()}} style={{backgroundColor:"#354b53",padding:20,borderRadius:4}}>
         <View style={{flexDirection:"row",gap:10}} >
             <View style={{flex:0.2,top:"15%"}}>
-                <View style={{width:35,height:35,backgroundColor:"#36b2db",borderRadius:2}}></View>
+                <View style={{width:35,height:35,backgroundColor:"#61edae",borderRadius:2}}></View>
             </View>
             <View style={{flex:1,marginTop:5}}>
      

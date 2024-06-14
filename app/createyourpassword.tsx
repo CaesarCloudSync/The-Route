@@ -33,13 +33,41 @@ export default function CreateYourPassword() {
           else{
             // Turn key email_address to email
             let signup_info = JSON.parse(personal_info)
+            let final_interests_info = JSON.parse(interests_info)
     
-            let final_json  = {"first_name": signup_info[0]["first_name"], "last_name": signup_info[1]["last_name"], "email": signup_info[2]["email_address"], "date_of_birth": signup_info[3]["date_of_birth"],"password":password}
-            
-            console.log(final_json)
-            
-            
-            const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/signupapi",final_json)
+            const final_signup_json  = {"first_name": signup_info[0]["first_name"], "last_name": signup_info[1]["last_name"], "email": signup_info[2]["email_address"], "date_of_birth": signup_info[3]["date_of_birth"],"password":password}
+            console.log(final_signup_json)
+            console.log(interests_info)
+              
+            const response = await axios.post("http://172.20.10.3:8080/api/v1/signupapi",final_signup_json)
+
+            let resultsignup = response.data
+            console.log(resultsignup)
+     
+            if ("access_token" in resultsignup){
+                let access_token = resultsignup.access_token
+                const config = {
+                    headers: { Authorization: `Bearer ${access_token}` }
+                };
+                console.log(config)
+                const responsestore = await axios.post("http://172.20.10.3:8080/api/v1/storeuserinterests",final_interests_info,config)
+                let result = responsestore.data
+                console.log(result,"message" in result)
+
+                if ("message" in result){
+                    await AsyncStorage.setItem("access_token",access_token)
+                    router.push("/qualifications")
+
+                }
+                else{
+                    Alert.alert(result.error)
+                }
+                
+            }
+            else{
+                Alert.alert(resultsignup.message)
+            }
+            /*
 
             let result = response.data
             console.log(result)
@@ -51,7 +79,7 @@ export default function CreateYourPassword() {
             }
             else if ("message" in result){
                 Alert.alert(result.message)
-            }
+            }*/
 
           }
         }
@@ -113,7 +141,7 @@ if (netInfo.isInternetReachable === true  ){
             onChangeText={setConfirmPassword}
             value={confirmpassword}
         />
-        <TouchableOpacity onPress={() =>{signup()}} style={{backgroundColor:"#3ec7f3",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
+        <TouchableOpacity onPress={() =>{signup()}} style={{backgroundColor:"#61edae",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
                     <Text style={{color:"white"}}>Create Your Password</Text>
             </TouchableOpacity>
 

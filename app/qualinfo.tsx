@@ -65,7 +65,7 @@ export default function QualInfo(){
             </View>
             </ScrollView>
             <View style={{position:"absolute",bottom:0,width:"100%",height:50,justifyContent:"center",alignItems:"center"}}>
-                <TouchableOpacity onPress={() =>{Linking.openURL(qual_info.link);}} style={{width:200,height:30,backgroundColor:"#36b2db",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
+                <TouchableOpacity onPress={() =>{Linking.openURL(qual_info.link);}} style={{width:200,height:30,backgroundColor:"#61edae",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
                     <Text style={{color:"white",fontWeight:"bold",fontSize:15}}>Apply</Text>
 
                 </TouchableOpacity>

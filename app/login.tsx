@@ -26,7 +26,7 @@ export default function Index() {
         // login here
         if (email !== "" && password !== ""){
           //console.log("login here",email,password)
-          const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/loginapi",{"email":email,"password":password})
+          const response = await axios.post("http://172.20.10.3:8080/api/v1/loginapi",{"email":email,"password":password})
 
           let result = response.data
           console.log(result)
@@ -96,7 +96,7 @@ if (netInfo.isInternetReachable === true  ){
             onChangeText={setPassword}
             value={password}
         />
-        <TouchableOpacity onPress={() =>{login()}} style={{backgroundColor:"#3ec7f3",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
+        <TouchableOpacity onPress={() =>{login()}} style={{backgroundColor:"#61edae",width:"100%",justifyContent:"center",alignItems:"center",padding:10,borderRadius:50}}>
                     <Text style={{color:"white"}}>Login</Text>
             </TouchableOpacity>
 

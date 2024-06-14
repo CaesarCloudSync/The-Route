@@ -50,10 +50,10 @@ if (netInfo.isInternetReachable === true  ){
 
         <View style={{flex:1,padding:30,gap:10,justifyContent:"center",alignItems:"center"}}>
             <View style={{flex:0.04}}>
-                <Text style={{fontSize:15,fontWeight:"bold"}}>Welcome to BTDTechConnect</Text>
+                <Text style={{fontSize:15,fontWeight:"bold"}}>Welcome to The Route</Text>
             </View>
             <View style={{flex:0.05,flexDirection:"row",gap:10}}>
-                <View style={{width:50,height:10,backgroundColor:"#3ec7f3",borderRadius:30}}></View>
+                <View style={{width:50,height:10,backgroundColor:"#61edae",borderRadius:30}}></View>
                 <View style={{width:50,height:10,backgroundColor:"grey",borderRadius:30}}></View>
 
             </View>
@@ -70,7 +70,7 @@ if (netInfo.isInternetReachable === true  ){
             }}>
                 
             </FlatList>
-            <TouchableOpacity onPress={() =>{next_page()}}   style={{backgroundColor:"#3ec7f3",width:"90%",justifyContent:"center",alignItems:"center",borderRadius:50}}>
+            <TouchableOpacity onPress={() =>{next_page()}}   style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",borderRadius:50}}>
                     <Text style={{color:"white",padding:20,fontWeight:"bold"}}>Next</Text>
             </TouchableOpacity>
 

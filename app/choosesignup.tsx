@@ -45,7 +45,7 @@ if (netInfo.isInternetReachable === true  ){
             <TouchableOpacity onPress={() =>{router.push("/login")}} style={{backgroundColor:"grey",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:50,alignSelf:"center"}}>
                     <Text style={{color:"white"}}>I already have an account</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() =>{router.push("/createaccount")}}   style={{backgroundColor:"#3ec7f3",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:50,alignSelf:"center"}}>
+            <TouchableOpacity onPress={() =>{router.push("/createaccount")}}   style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:50,alignSelf:"center"}}>
                     <Text style={{color:"white"}}>Create my Account</Text>
             </TouchableOpacity>
 
