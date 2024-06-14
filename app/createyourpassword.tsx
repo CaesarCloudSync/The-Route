@@ -36,8 +36,8 @@ export default function CreateYourPassword() {
             let final_interests_info = JSON.parse(interests_info)
     
             const final_signup_json  = {"first_name": signup_info[0]["first_name"], "last_name": signup_info[1]["last_name"], "email": signup_info[2]["email_address"], "date_of_birth": signup_info[3]["date_of_birth"],"password":password}
-            console.log(final_signup_json)
-            console.log(interests_info)
+            //console.log(final_signup_json)
+            //console.log(interests_info)
               
             const response = await axios.post("http://172.20.10.3:8080/api/v1/signupapi",final_signup_json)
 
@@ -49,10 +49,9 @@ export default function CreateYourPassword() {
                 const config = {
                     headers: { Authorization: `Bearer ${access_token}` }
                 };
-                console.log(config)
                 const responsestore = await axios.post("http://172.20.10.3:8080/api/v1/storeuserinterests",final_interests_info,config)
                 let result = responsestore.data
-                console.log(result,"message" in result)
+          
 
                 if ("message" in result){
                     await AsyncStorage.setItem("access_token",access_token)
