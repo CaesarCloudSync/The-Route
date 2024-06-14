@@ -7,6 +7,7 @@ import Header from '@/components/homecomponents/header';
 import MainBody from '@/components/homecomponents/mainbody';
 import ProgressTracker from '@/components/homecomponents/progresstracker';
 import StatusChoicesDropDown from '@/components/homecomponents/statuschoicesdropdown';
+import NavFooter from '@/components/navfooter/navfooter';
 export default function TabOneScreen() {
   const qualifications = [{"qualuuid":"qual-1234","qual_name":"Python Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"},{"qualuuid":"qual-2222","qual_name":"React Award","qual_icon":"https://qual_icon"}]
 
@@ -81,6 +82,7 @@ export default function TabOneScreen() {
      
      
       </ScrollView>
+      <NavFooter/>
 
     </View>
   );

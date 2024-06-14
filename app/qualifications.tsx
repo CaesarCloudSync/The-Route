@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from 'react-native'
+import NavFooter from '@/components/navfooter/navfooter';
 import Header from '@/components/qualificationscomponents/header';
 import MainBody from '@/components/qualificationscomponents/mainbody';
 import FilterCarousel from '@/components/qualificationscomponents/filtercarousel';
@@ -24,6 +25,7 @@ export default function QualificationsScreen() {
       <Search style={{flex: 0.3, backgroundColor: 'white'}} />
       <FilterCarousel chosen_career={chosen_career} careers={careers_info.filters} style={{flex: 0.40, backgroundColor: 'white'}} />
       <MainBody qualifications={qualifications} style={{flex: 3, backgroundColor: 'white'}} />
+      <NavFooter />
     </View>
   );
 }

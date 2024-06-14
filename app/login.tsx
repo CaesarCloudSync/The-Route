@@ -65,6 +65,7 @@ if (netInfo.isInternetReachable === true  ){
                 <Text style={{fontSize:25}}>Log in</Text>
             </View>
             <TextInput
+            autoCapitalize='none'
             placeholder='Email'
         style={{
             height: 40,
