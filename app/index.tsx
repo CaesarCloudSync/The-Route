@@ -16,7 +16,7 @@ export default function Index() {
     const router = useRouter();
     const [isLoggedIn,setIsLoggedIn] = useState(false)
     const check_loggeed_in =async () => {
-        await AsyncStorage.removeItem("access_token")
+        //await AsyncStorage.removeItem("access_token")
         const access_token = await AsyncStorage.getItem("access_token");
     
         console.log(access_token)
