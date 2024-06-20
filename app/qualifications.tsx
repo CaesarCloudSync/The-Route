@@ -42,11 +42,18 @@ export default function QualificationsScreen() {
           backgroundColor: 'white'
         },
       ]}>
-      {qualifications.length !== 0 &&<Header style={{flex: 0.3, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 &&<Header style={{flex: 0.1, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 &&<Search style={{flex: 0.3, backgroundColor: 'white'}} />}
-      {qualifications.length !== 0 && user_interests !== null &&<FilterCarousel chosen_career={user_interests.careers_label} careers={careers_info.filters} style={{flex: 0.40, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 && user_interests !== null &&<FilterCarousel careers={careers_info.filters} style={{flex: 0.20, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 && user_interests !== null &&
+                <View style={{flex:0.3,justifyContent:"center",alignItems:"center",marginTop:10}} >
+                  <Text style={{fontWeight:"bold",fontSize:20}}>{user_interests.careers_label}</Text>
+                  <Text style={{fontWeight:"bold",fontSize:15}}>{user_interests.industry_label}</Text>
+  
+              </View>
+                  }
       {qualifications.length !== 0 && <MainBody qualifications={qualifications} style={{flex: 3, backgroundColor: 'white'}} />}
-      {/*qualifications.length !== 0 &&<NavFooter />*/}
+      {qualifications.length !== 0 &&<NavFooter style={{flex:0.13}}/>}
     </View>
   );
 }
