@@ -15,11 +15,13 @@ export default function QualificationsScreen() {
   const careers_info = {"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
   const [qualifications,setQualifications] = useState([]);
   const [user_interests,setUserInterests] = useState<any>(null);
+  const [access_token,setAccessToken] = useState<any>("");
   const getqualifications =async () => {
     const access_token = await AsyncStorage.getItem("access_token");
     const config = {
       headers: { Authorization: `Bearer ${access_token}` }
   };
+    setAccessToken(access_token)
     const response= await axios.get("http://192.168.0.12:8080/api/v1/getqualifications?page=1")
     let result = response.data
     setQualifications(result["qualifications"])
@@ -46,7 +48,7 @@ export default function QualificationsScreen() {
       {qualifications.length !== 0 &&<Search style={{flex: 0.3, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 && user_interests !== null &&<FilterCarousel careers={careers_info.filters} style={{flex: 0.20, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 && user_interests !== null &&
-                <View style={{flex:0.3,justifyContent:"center",alignItems:"center",marginTop:10}} >
+                <View style={{flex:0.23,justifyContent:"center",alignItems:"center",marginTop:10}} >
                   <Text style={{fontWeight:"bold",fontSize:20}}>{user_interests.careers_label}</Text>
                   <Text style={{fontWeight:"bold",fontSize:15}}>{user_interests.industry_label}</Text>
   

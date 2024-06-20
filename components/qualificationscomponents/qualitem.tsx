@@ -38,8 +38,10 @@ export default function QualItem({qualification}:any){ // :QualificationItemInte
             </Text>
             <Text style={{color:"grey"}}>Earning Potential: {qualification.earning_potential_lower} - £{qualification.earning_potential_upper} /yr {qualification.earning_potential_description !== "" && `(${qualification.earning_potential_description})`}</Text>
             </View>
-            <View style={{flex:0.1}}>
-            <FontAwesome style={{color:"#d9d9d9"}} name="bookmark" size={27} />
+            <View style={{flex:0.1,justifyContent:"center"}}>
+            <TouchableOpacity onPress={() =>{}}>
+                <FontAwesome style={{color:"#61edae"}} name="bookmark" size={27} />
+            </TouchableOpacity>
             </View>
 
         </View>
