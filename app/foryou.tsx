@@ -13,7 +13,7 @@ import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
-export default function QualificationsScreen() {
+export default function ForYou() {
   const chosen_career = "Game Development"
   const router = useRouter();
   const careers_info = {"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
@@ -26,8 +26,12 @@ export default function QualificationsScreen() {
   const getqualifications =async () => {
 
   console.log(pagenum)
+  const access_token = await AsyncStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${access_token}` }
+};
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://192.168.0.12:8080/api/v1/getqualifications?offset=${offset}`)
+    const response= await axios.get(`http://192.168.0.12:8080/api/v1/getuserinterestqualifications?offset=${offset}`,config)
     let result = response.data
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
@@ -40,7 +44,18 @@ export default function QualificationsScreen() {
     }
 
   }
-
+  const getuserinterests =async () => {
+    const access_token = await AsyncStorage.getItem("access_token");
+    const config = {
+      headers: { Authorization: `Bearer ${access_token}` }
+  };
+    const responseinterests = await axios.get("http://192.168.0.12:8080/api/v1/getuserinterests",config)
+    let resultinterests = responseinterests.data
+    setUserInterests(resultinterests)
+  }
+  useEffect(() =>{
+    getuserinterests()
+  },[])
   useEffect(() =>{
     getqualifications()
   },[pagechanged])
@@ -92,9 +107,15 @@ export default function QualificationsScreen() {
         },
       ]}>
       {qualifications.length !== 0 &&<Search style={{flex: 0.3, backgroundColor: 'white'}} />}
-      {qualifications.length !== 0 && <FilterCarousel careers={careers_info.filters} style={{flex: 0.20, backgroundColor: 'white'}} />}
 
-            {qualifications.length !== 0 && 
+      {qualifications.length !== 0 && user_interests !== null &&
+                <View style={{flex:0.23,marginTop:10}} >
+                  <Text style={{fontWeight:"bold",fontSize:20}}>{user_interests.careers_label}</Text>
+                  <Text style={{fontWeight:"bold",fontSize:15}}>{user_interests.industry_label}</Text>
+  
+              </View>
+                  }
+            {qualifications.length !== 0 && user_interests !== null &&
       <View style={{flex:0.15,justifyContent:"center",alignItems:"center",marginTop:10}} >
         <View style={{flexDirection:"row",gap:20}}>
           <TouchableOpacity style={{top:5,width:30}} onPress={() =>{navleft()}}>
@@ -102,7 +123,7 @@ export default function QualificationsScreen() {
           </TouchableOpacity>
           {pagecarousel.map((index) =>{
                       return( <TouchableOpacity onPress={() =>{navpick(index+ pagenum)}} style={{backgroundColor:index+ pagenum === pagenum ? "#61edae" :"transparent",borderRadius:3,padding:5}}>
-                        <Text style={{fontWeight:"bold"}}>
+                        <Text>
                         {index + pagenum}
                         </Text></TouchableOpacity>)
                   }) }
@@ -113,7 +134,7 @@ export default function QualificationsScreen() {
     </View>
                   }
       {qualifications.length !== 0 && <MainBody qualifications={qualifications} style={{flex: 3, backgroundColor: 'white'}} />}
-      {qualifications.length !== 0 &&<NavFooter currentpage={"home"} style={{flex:0.13}}/>}
+      {qualifications.length !== 0 &&<NavFooter currentpage={"foryou"} style={{flex:0.13}}/>}
     </View>
   );
 }

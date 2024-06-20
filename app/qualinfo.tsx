@@ -32,9 +32,9 @@ export default function QualInfo(){
                 <Text style={{color: 'white',fontSize: 20,lineHeight: 24,fontWeight: 'bold',backgroundColor: '#000000c0',maxWidth:180,padding:10}}>{qual_info.institution}</Text>
             </View>
             </ImageBackground>
-            <View style={{flex:0.08,padding:20,flexDirection:"row",gap:10}}>
+            <View style={{flex:0.08,flexWrap:"wrap",padding:20,flexDirection:"row",gap:10}}>
                 <Image style={{width:35,height:35,borderRadius:3}} source={{uri:qual_info.qual_icon}}></Image>
-                <Text style={{top:5,fontWeight:"bold",fontSize:25,textDecorationLine: 'underline'}}>
+                <Text style={{top:5,fontWeight:"bold",fontSize:25,textDecorationLine: 'underline',flexShrink: 1}}>
                     {qual_info.institution}
                 </Text>
 

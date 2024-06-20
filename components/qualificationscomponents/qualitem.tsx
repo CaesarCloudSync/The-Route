@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useState } from "react";
 
-export default function QualItem({qualification}:any){ // :QualificationItemInterface
+export default function QualItem({qualification,bookmarkchanged,setBookMarkChanged}:any){ // :QualificationItemInterface
     const router = useRouter();
 
     const navqualinfopage = () =>{
@@ -33,8 +33,27 @@ export default function QualItem({qualification}:any){ // :QualificationItemInte
 
 
     }
+    const removebookmark =async () => {
+        if (bookmarkchanged !== null || bookmarkchanged !== undefined){
+            const access_token = await AsyncStorage.getItem("access_token");
+            const config = {
+              headers: { Authorization: `Bearer ${access_token}` }
+          };
+            const qual_uuid = qualification.qual_uuid
+            const response = await axios.delete(`http://192.168.0.12:8080/api/v1/removequalificationbookmark?qual_uuid=${qual_uuid}`,config)
+            let result = response.data
+          if (bookmarkchanged === true){
+            setBookMarkChanged(false)
+          }
+          else{
+            setBookMarkChanged(true)
+          }
+        }
+
+        
+    }
     return(
-    <TouchableOpacity onPress={() =>{navqualinfopage()}} style={{backgroundColor:"#354b53" ,padding:20,borderRadius:4}}>
+    <TouchableOpacity onLongPress={() =>{removebookmark()}} onPress={() =>{navqualinfopage()}} style={{backgroundColor:"#354b53" ,padding:20,borderRadius:4}}>
         <View style={{flexDirection:"row",gap:10}} >
             <View style={{flex:0.2,top:"15%"}}>
                 <Image style={{width:35,height:35,borderRadius:3}} source={{uri:qualification.qual_icon}}></Image>
