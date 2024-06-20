@@ -15,13 +15,11 @@ export default function QualificationsScreen() {
   const careers_info = {"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
   const [qualifications,setQualifications] = useState([]);
   const [user_interests,setUserInterests] = useState<any>(null);
-  const [access_token,setAccessToken] = useState<any>("");
   const getqualifications =async () => {
     const access_token = await AsyncStorage.getItem("access_token");
     const config = {
       headers: { Authorization: `Bearer ${access_token}` }
   };
-    setAccessToken(access_token)
     const response= await axios.get("http://192.168.0.12:8080/api/v1/getqualifications?page=1")
     let result = response.data
     setQualifications(result["qualifications"])

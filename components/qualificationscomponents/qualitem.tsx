@@ -4,13 +4,25 @@ import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 export default function QualItem({qualification}:any){ // :QualificationItemInterface
     const router = useRouter();
     const navqualinfopage = () =>{
         router.push({ pathname: "/qualinfo", params: {"qual_info_param":JSON.stringify(qualification)}})
 
     }
-
+    const bookmarkqualification =async () => {
+        const access_token = await AsyncStorage.getItem("access_token");
+        const config = {
+          headers: { Authorization: `Bearer ${access_token}` }
+      };
+      console.log()
+      const qual_uuid = qualification.qual_uuid
+      const response = await axios.post("http://192.168.0.12:8080/api/v1/storequalificationbookmark",{"qual_uuid":qual_uuid},config)
+      let result = response.data
+      console.log(result)
+    }
     return(
     <TouchableOpacity onPress={() =>{navqualinfopage()}} style={{backgroundColor:"#354b53",padding:20,borderRadius:4}}>
         <View style={{flexDirection:"row",gap:10}} >
@@ -39,7 +51,7 @@ export default function QualItem({qualification}:any){ // :QualificationItemInte
             <Text style={{color:"grey"}}>Earning Potential: {qualification.earning_potential_lower} - £{qualification.earning_potential_upper} /yr {qualification.earning_potential_description !== "" && `(${qualification.earning_potential_description})`}</Text>
             </View>
             <View style={{flex:0.1,justifyContent:"center"}}>
-            <TouchableOpacity onPress={() =>{}}>
+            <TouchableOpacity onPress={() =>{bookmarkqualification()}}>
                 <FontAwesome style={{color:"#61edae"}} name="bookmark" size={27} />
             </TouchableOpacity>
             </View>
