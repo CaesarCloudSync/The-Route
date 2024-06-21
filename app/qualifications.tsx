@@ -28,12 +28,14 @@ export default function QualificationsScreen() {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
     let result = response.data
-    console.log(result)
+    //console.log(result)
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
     }
     else if ("error" in result){
-      Alert.alert(result.error)
+      if (!result.error.includes("no qualifications") ){
+        Alert.alert(result.error)
+      }
     }
     else if ("offsetend" in result){
       setAtEnd(true)
@@ -44,7 +46,7 @@ export default function QualificationsScreen() {
 
   const getqualifications =async () => {
 
-  console.log(pagenum)
+  //console.log(pagenum)
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const response= await axios.get(`http://172.20.10.3:8080/api/v1/getqualifications?offset=${offset}`)
     let result = response.data
