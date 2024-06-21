@@ -2,7 +2,7 @@ import { View,Text, Image, TextInput } from "react-native"
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
-export default function Search({style,setSearchText}:any){
+export default function Search({style,setSearchText,searchqualifications}:any){
 
 
     return(
@@ -12,7 +12,7 @@ export default function Search({style,setSearchText}:any){
                     </View>
             <View style={{height:"50%",backgroundColor:"#61edae",justifyContent:"center",alignItems:"flex-start",borderRadius:2,padding:4,flexDirection:"row"}}>
                 <AntDesign name="search1" size={20} color="black" />
-                <TextInput onChangeText={setSearchText} style={{height:20,width:"90%"}}></TextInput>
+                <TextInput onSubmitEditing={() =>{searchqualifications()}} onChangeText={setSearchText} style={{height:20,width:"90%"}}></TextInput>
             </View>
             
         </View>

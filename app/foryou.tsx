@@ -23,6 +23,7 @@ export default function ForYou() {
   const [pagecarousel,setPageCarousel] = useState([0,1,2,3]);
   const[pagechanged,setPageChanged] = useState(false);
   const [atend,setAtEnd] = useState(false);
+  const [searchtext,setSearchText] = useState("");
   const getqualifications =async () => {
 
   console.log(pagenum)
@@ -44,6 +45,23 @@ export default function ForYou() {
     }
 
   }
+  const searchqualifications =async () => {
+    let offset = pagenum === 1 ? 1 : pagenum * 8 
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    let result = response.data
+    console.log(result)
+    if ("qualifications" in result){
+      setQualifications(result["qualifications"])
+    }
+    else if ("error" in result){
+      Alert.alert(result.error)
+    }
+    else if ("offsetend" in result){
+      setAtEnd(true)
+    }
+
+    
+  }
   const getuserinterests =async () => {
     const access_token = await AsyncStorage.getItem("access_token");
     const config = {
@@ -57,8 +75,18 @@ export default function ForYou() {
     getuserinterests()
   },[])
   useEffect(() =>{
-    getqualifications()
+    if (searchtext.length === 0){
+      getqualifications()
+    }
+    else{
+      searchqualifications()
+    }
   },[pagechanged])
+  useEffect(() =>{
+    if (searchtext.length === 0){
+      getqualifications()
+    }
+  },[searchtext])
     const changepage = () =>{
       if (pagechanged === true){
         setPageChanged(false)
@@ -67,6 +95,7 @@ export default function ForYou() {
         setPageChanged(true)
       }
     }
+
     const navleft = () =>{
       if (pagenum !== 1){
           setPageNum(pagenum-1)
@@ -106,7 +135,7 @@ export default function ForYou() {
           backgroundColor: 'white'
         },
       ]}>
-      {qualifications.length !== 0 &&<Search style={{flex: 0.3, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 &&<Search setSearchText={setSearchText} searchqualifications={searchqualifications} style={{flex: 0.3, backgroundColor: 'white'}} />}
 
       {qualifications.length !== 0 && user_interests !== null &&
                 <View style={{flex:0.23,marginTop:10}} >

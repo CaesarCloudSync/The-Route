@@ -52,6 +52,10 @@ export default function QualItem({qualification,bookmarkchanged,setBookMarkChang
 
         
     }
+    function capitalizeFirstLetter(str:string) {
+      return str[0].toUpperCase() + str.slice(1);
+    }
+    
     return(
     <TouchableOpacity onLongPress={() =>{removebookmark()}} onPress={() =>{navqualinfopage()}} style={{backgroundColor:"#354b53" ,padding:20,borderRadius:4}}>
         <View style={{flexDirection:"row",gap:10}} >
@@ -60,22 +64,26 @@ export default function QualItem({qualification,bookmarkchanged,setBookMarkChang
             </View>
             <View style={{flex:1,marginTop:5}}>
      
-            <Text style={{color:"white"}}>
+            <Text style={{color:"white",fontSize:20,fontWeight:"bold"}}>
             {qualification.institution}
             </Text>
+            
             <Text style={{color:"white"}}>{qualification.qual_name}</Text>
+            <Text style={{color:"white"}}>
+            {capitalizeFirstLetter(qualification.industry)}
+            </Text>
             {qualification.online_freq_label !== "" &&
             <Text style={{color:"grey"}}>
-            {qualification.online_freq_label}
+            Online: {qualification.online_freq_label}
             </Text>}
             {qualification.in_person_freq_label !== "" &&
             <Text style={{color:"grey"}}>
-            {qualification.in_person_freq_label}
+            In Person: {qualification.in_person_freq_label}
             </Text>}
 
 
             <Text style={{color:"grey"}}>
-            {qualification.course_length_label}
+            Course Length: {qualification.course_length_label}
             </Text>
             <Text style={{color:"grey"}}>Earning Potential: {qualification.earning_potential_lower} - £{qualification.earning_potential_upper} /yr {qualification.earning_potential_description !== "" && `(${qualification.earning_potential_description})`}</Text>
             </View>
