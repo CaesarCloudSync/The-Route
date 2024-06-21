@@ -39,7 +39,7 @@ export default function CreateYourPassword() {
             //console.log(final_signup_json)
             //console.log(interests_info)
               
-            const response = await axios.post("http://192.168.0.12:8080/api/v1/signupapi",final_signup_json)
+            const response = await axios.post("http://172.20.10.3:8080/api/v1/signupapi",final_signup_json)
 
             let resultsignup = response.data
             console.log(resultsignup)
@@ -49,7 +49,7 @@ export default function CreateYourPassword() {
                 const config = {
                     headers: { Authorization: `Bearer ${access_token}` }
                 };
-                const responsestore = await axios.post("http://192.168.0.12:8080/api/v1/storeuserinterests",final_interests_info,config)
+                const responsestore = await axios.post("http://172.20.10.3:8080/api/v1/storeuserinterests",final_interests_info,config)
                 let result = responsestore.data
           
 
