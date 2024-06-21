@@ -79,7 +79,10 @@ export default function ForYou() {
       getqualifications()
     }
     else{
-      searchqualifications()
+      const timer = setTimeout(() =>{
+        searchqualifications()
+      },500)
+      return () => clearTimeout(timer);
     }
   },[pagechanged])
   useEffect(() =>{

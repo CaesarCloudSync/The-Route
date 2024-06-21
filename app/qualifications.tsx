@@ -65,12 +65,17 @@ export default function QualificationsScreen() {
       getqualifications()
     }
     else{
-      searchqualifications()
     }
   },[pagechanged])
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
+    }
+    else{
+      const timer = setTimeout(() =>{
+        searchqualifications()
+      },500)
+      return () => clearTimeout(timer);
     }
   },[searchtext])
     const changepage = () =>{
