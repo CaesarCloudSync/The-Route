@@ -23,6 +23,39 @@ export default function QualificationsScreen() {
   const [pagecarousel,setPageCarousel] = useState([0,1,2,3]);
   const[pagechanged,setPageChanged] = useState(false);
   const [atend,setAtEnd] = useState(false);
+  const [searchtext,setSearchText] = useState("");
+  const searchqualifications =async () => {
+    console.log("hell")
+    let offset = pagenum === 1 ? 1 : pagenum * 8 
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    let result = response.data
+    console.log(result)
+    if ("qualifications" in result){
+      setQualifications(result["qualifications"])
+    }
+    else if ("error" in result){
+      Alert.alert(result.error)
+    }
+    else if ("offsetend" in result){
+      setAtEnd(true)
+    }
+
+    
+  }
+  useEffect(() =>{
+    const timer = setTimeout(async () =>{
+      if (searchtext.length !== 0){
+        // Make Api call
+          console.log("ham")
+        await searchqualifications();
+        
+      }
+      else if (searchtext.length === 0){
+        // Maybe do something here if needed.
+      }
+    },2000)
+    return () => clearTimeout(timer)
+  },[searchtext])
   const getqualifications =async () => {
 
   console.log(pagenum)
@@ -91,7 +124,7 @@ export default function QualificationsScreen() {
           backgroundColor: 'white'
         },
       ]}>
-      {qualifications.length !== 0 &&<Search style={{flex: 0.3, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 &&<Search setSearchText={setSearchText} style={{flex: 0.3, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 && <FilterCarousel careers={careers_info.filters} style={{flex: 0.20, backgroundColor: 'white'}} />}
 
             {qualifications.length !== 0 && 

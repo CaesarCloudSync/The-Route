@@ -2,8 +2,8 @@ import { View,Text, Image, TextInput } from "react-native"
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
-export default function Search({style}:any){
-    const [searchtext,setSearchText] = useState("");
+export default function Search({style,setSearchText}:any){
+
 
     return(
         <View style={[style,{justifyContent:"center",alignItems:"center",flexDirection:"row"}]}>
