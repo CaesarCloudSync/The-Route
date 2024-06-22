@@ -49,7 +49,7 @@ export default function ForYou() {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
     let result = response.data
-    console.log(result)
+    //console.log(result)
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
     }

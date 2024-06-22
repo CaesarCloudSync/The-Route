@@ -17,7 +17,7 @@ export default function Account(){
       };
         const response = await axios.get("http://172.20.10.3:8080/api/v1/getuserinfo",config)
         let result = response.data
-        console.log(result)
+        //console.log(result)
         if ("email" in result){
             setAccountInfo(result)
         }
