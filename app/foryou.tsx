@@ -32,7 +32,7 @@ export default function ForYou() {
     headers: { Authorization: `Bearer ${access_token}` }
 };
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getuserinterestqualifications?offset=${offset}`,config)
+    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinterestqualifications?offset=${offset}`,config)
     let result = response.data
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
@@ -47,7 +47,7 @@ export default function ForYou() {
   }
   const searchqualifications =async () => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
     let result = response.data
     console.log(result)
     if ("qualifications" in result){
@@ -67,7 +67,7 @@ export default function ForYou() {
     const config = {
       headers: { Authorization: `Bearer ${access_token}` }
   };
-    const responseinterests = await axios.get("http://172.20.10.3:8080/api/v1/getuserinterests",config)
+    const responseinterests = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinterests",config)
     let resultinterests = responseinterests.data
     setUserInterests(resultinterests)
   }
