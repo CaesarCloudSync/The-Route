@@ -26,7 +26,7 @@ export default function Index() {
         // login here
         if (email !== "" && password !== ""){
           //console.log("login here",email,password)
-          const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/loginapi",{"email":email,"password":password})
+          const response = await axios.post("http://172.20.10.3:8080/api/v1/loginapi",{"email":email,"password":password})
 
           let result = response.data
           console.log(result)

@@ -15,7 +15,7 @@ export default function BookMarks(){
         const config = {
           headers: { Authorization: `Bearer ${access_token}` }
       };
-        const response = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getbookmarkedqualifications",config)
+        const response = await axios.get("http://172.20.10.3:8080/api/v1/getbookmarkedqualifications",config)
         let result = response.data
         //console.log(result)
         if ("qual_bookmarks" in result){
