@@ -77,6 +77,17 @@ export default function Account(){
         }}>
             
         </FlatList>}
+        {account_info !== null &&
+        <View style={{flex:0.1,justifyContent:"center",alignItems:"center"}}>
+            <TouchableOpacity onPress={() =>{propmptdeleteaccount()}} style={{backgroundColor:"red",width:120,padding:10,borderRadius:5}}>
+                <Text style={{color:"white"}}>
+                    Delete Account
+                </Text>
+
+            </TouchableOpacity>
+        </View>
+ 
+        }
 
 
         {account_info !== null &&
