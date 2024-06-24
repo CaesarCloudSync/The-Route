@@ -78,9 +78,7 @@ else if (netInfo.isInternetReachable === false){
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
                 <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>
-                <Text style={{color:"white"}}>
-                Read your Downloads
-                </Text>
+
             </View>
             
 

@@ -26,7 +26,7 @@ export default function Index() {
         // login here
         if (email !== "" && password !== ""){
           //console.log("login here",email,password)
-          const response = await axios.post("http://172.20.10.3:8080/api/v1/loginapi",{"email":email,"password":password})
+          const response = await axios.post("http://192.168.0.12:8080/api/v1/loginapi",{"email":email,"password":password})
 
           let result = response.data
           console.log(result)
@@ -132,9 +132,7 @@ else if (netInfo.isInternetReachable === false){
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
                 <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>
-                <Text style={{color:"white"}}>
-                Read your Downloads
-                </Text>
+
             </View>
             
 

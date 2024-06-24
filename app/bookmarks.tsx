@@ -15,7 +15,7 @@ export default function BookMarks(){
         const config = {
           headers: { Authorization: `Bearer ${access_token}` }
       };
-        const response = await axios.get("http://172.20.10.3:8080/api/v1/getbookmarkedqualifications",config)
+        const response = await axios.get("http://192.168.0.12:8080/api/v1/getbookmarkedqualifications",config)
         let result = response.data
         //console.log(result)
         if ("qual_bookmarks" in result){
@@ -38,7 +38,9 @@ export default function BookMarks(){
             </Text>
         </View>
         {bookmarked_quals.length !== 0 && <MainBody  qualifications={bookmarked_quals}bookmarkchanged={bookmarkchanged} setBookMarkChanged={setBookMarkChanged} style={{flex: 3, backgroundColor: 'white'}} />}
-        {bookmarked_quals.length !== 0 &&<NavFooter currentpage={"bookmarks"} style={{flex:0.13}}/>}
+        {bookmarked_quals.length === 0 && <View style={{flex:1}}>
+        </View>}
+        <NavFooter currentpage={"bookmarks"} style={{flex:0.13}}/>
         </View>
     )
 }

@@ -53,7 +53,7 @@ export default function IndustryChoices() {
     }
     
 const getindustrychoices =async () => {
-    const response = await axios.get("http://172.20.10.3:8080/api/v1/getindustrychoices")
+    const response = await axios.get("http://192.168.0.12:8080/api/v1/getindustrychoices")
     let result = response.data
     let careers = result.careers
     let industrys = result.industrys
@@ -160,9 +160,7 @@ else if (netInfo.isInternetReachable === false){
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
                 <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>
-                <Text style={{color:"white"}}>
-                Read your Downloads
-                </Text>
+
             </View>
             
 

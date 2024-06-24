@@ -1,4 +1,4 @@
-import { FlatList, View,Text,Image } from 'react-native';
+import { FlatList, View,Text,Image, Alert } from 'react-native';
 
 import { Link } from 'expo-router';
 import axios from 'axios';
@@ -21,9 +21,27 @@ export default function Index() {
     
         console.log(access_token)
         if (access_token){ // This should be just access_token but for testing puproses
-            router.push("/qualifications")
+            const config = {
+                headers: { Authorization: `Bearer ${access_token}` }
+            };
+            const response = await axios.get("http://192.168.0.12:8080/api/v1/getuserinfo",config)
+            let result = response.data
+            console.log(result)
+            if ("error" in result){
+                if (result.error.includes("does not exist")){
+
+                }
+                else{
+                    Alert.alert(result.error)
+                }
+            }
+            else{
+                router.push("/qualifications")
+                setIsLoggedIn(true)
+            }
+            
             //router.push("/mainhome")
-            setIsLoggedIn(true)
+            
         }
         else{
             setIsLoggedIn(false);
@@ -88,9 +106,7 @@ else if (netInfo.isInternetReachable === false){
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
                 <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>
-                <Text style={{color:"white"}}>
-                Read your Downloads
-                </Text>
+
             </View>
             
 
