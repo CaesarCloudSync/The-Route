@@ -3,10 +3,11 @@ import { Alert, View,Text, TouchableOpacity, FlatList} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import MainBody from "@/components/qualificationscomponents/mainbody";
-import { useNavigation } from "expo-router";
+import { useRouter, useNavigation } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import NavFooter from "@/components/navfooter/navfooter";
 export default function Account(){
+    const router = useRouter();
     const navigation = useNavigation();
     const [account_info,setAccountInfo] = useState(null);
     const [bookmarkchanged,setBookMarkChanged] = useState(false)
@@ -44,6 +45,11 @@ export default function Account(){
           );
         
     }
+    const logout =async () => {
+        await AsyncStorage.removeItem("access_token")
+        router.push("/")
+        
+    }
     function capitalizeFirstLetter(str:string) {
         return str[0].toUpperCase() + str.slice(1);
       }
@@ -78,9 +84,14 @@ export default function Account(){
             
         </FlatList>}
 
-
+        {account_info !== null &&
+        <TouchableOpacity onPress={() =>{logout()}} style={{flex:0.1,backgroundColor:"grey",width:100,height:50,justifyContent:"center",alignItems:"center",borderRadius:10,alignSelf:"center"}}>
+        <Text style={{color:"white"}}>Log Out</Text>    
+        </TouchableOpacity>}
         {account_info !== null &&
         <NavFooter currentpage={"account"} style={{flex:0.13}}/>}
+
+
 
         </View>
     )
