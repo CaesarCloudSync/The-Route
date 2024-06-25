@@ -89,7 +89,6 @@ else if (netInfo.isInternetReachable === null){
     return(
         <View style={{flex:1,backgroundColor:"white"}}>
         <StatusBar  hidden/>
-        <Header style={{flex:1}}/>
         {<View style={{flex:1}}></View>}
         <NavigationFooter currentpage={"home"}></NavigationFooter>
 
@@ -102,7 +101,7 @@ else if (netInfo.isInternetReachable === false){
     return(
         <View style={{flex:1}}>
             {/*Header */}
-            <Header style={{flex:1}}/>
+
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
                 <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>

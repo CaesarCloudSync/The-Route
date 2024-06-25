@@ -49,7 +49,7 @@ export default function Account(){
     const propmptdeleteaccount =async () => {
         Alert.alert(
             'Delete Account',
-            'This is unreversable!!!', // <- this part is optional, you can pass an empty string
+            'This is Unreversable!!!', // <- this part is optional, you can pass an empty string
             [
               {text: 'Yes', onPress: () => {deleteaccount()}},
               {text: 'Cancel', onPress: () => {}}
