@@ -16,7 +16,7 @@ import { useRouter } from 'expo-router';
 export default function QualificationsScreen() {
   const chosen_career = "Game Development"
   const router = useRouter();
-  const careers_info = {"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
+  const [careers_info,setCareersInfo]= useState(null); //{"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
   const [qualifications,setQualifications] = useState([]);
   const [user_interests,setUserInterests] = useState<any>(null);
   const [pagenum,setPageNum] = useState(1);
@@ -43,6 +43,23 @@ export default function QualificationsScreen() {
 
     
   }
+  const getfiltercareers =async () => {
+    let offset = pagenum === 1 ? 1 : pagenum * 8 
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getcareerfilter?offset=${offset}`)
+    let result = response.data
+    if ("filters" in result){
+      setCareersInfo(result["filters"])
+    }
+    else if ("error" in result){
+      Alert.alert(result.error)
+    }
+    else if ("offsetend" in result){
+      setAtEnd(true)
+    }
+    
+    
+  }
+
 
   const getqualifications =async () => {
 
@@ -65,6 +82,7 @@ export default function QualificationsScreen() {
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
+      getfiltercareers()
     }
     else{
     }
@@ -72,6 +90,7 @@ export default function QualificationsScreen() {
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
+      //getfiltercareers()
     }
     else{
       const timer = setTimeout(() =>{
@@ -128,7 +147,7 @@ export default function QualificationsScreen() {
         },
       ]}>
       {qualifications.length !== 0 &&<Search searchqualifications={searchqualifications} setSearchText={setSearchText} style={{flex: 0.3, backgroundColor: 'white'}} />}
-      {qualifications.length !== 0 && <FilterCarousel careers={careers_info.filters} style={{flex: 0.20, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 && careers_info !== null &&<FilterCarousel careers={careers_info} style={{flex: 0.20, backgroundColor: 'white'}} />}
 
             {qualifications.length !== 0 && 
       <View style={{flex:0.15,justifyContent:"center",alignItems:"center",marginTop:10}} >
