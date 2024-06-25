@@ -26,7 +26,7 @@ export default function QualificationsScreen() {
   const [searchtext,setSearchText] = useState("");
   const searchqualifications =async () => {
     //let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}`)
+    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/searchqualifications?text=${searchtext}`)
     let result = response.data
     //console.log(result)
     if ("qualifications" in result){
@@ -43,7 +43,7 @@ export default function QualificationsScreen() {
   }
   const getfiltercareers =async () => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getcareerfilter?offset=${offset}`)
+    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getcareerfilter?offset=${offset}`)
     let result = response.data
     if ("filters" in result){
       setCareersInfo(result["filters"])
@@ -63,7 +63,7 @@ export default function QualificationsScreen() {
 
   //console.log(pagenum)
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getqualifications?offset=${offset}`)
+    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getqualifications?offset=${offset}`)
     let result = response.data
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
