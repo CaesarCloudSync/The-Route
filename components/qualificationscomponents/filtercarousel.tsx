@@ -1,7 +1,7 @@
 import { Text, View ,FlatList} from "react-native"
 import FilterItem from "./filteritem"
 import { FilterItemInterface } from "./qualinterfaces"
-export default function FilterCarousel({style,careers}:any){
+export default function FilterCarousel({style,careers,setQualifications}:any){
 
     return(
     <View style={[style,{padding:"2%"}]}>
@@ -11,7 +11,7 @@ export default function FilterCarousel({style,careers}:any){
                 <FlatList<FilterItemInterface>
                 style={{flex:1}}
                 data={careers}
-                renderItem={({ item ,index}) => <FilterItem index={index} label={item.label} value={item.value} />}
+                renderItem={({ item ,index}) => <FilterItem setQualifications={setQualifications} index={index} label={item.label} value={item.value} />}
                 horizontal={true}
                 scrollEnabled
                 showsHorizontalScrollIndicator={false}

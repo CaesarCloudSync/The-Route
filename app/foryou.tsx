@@ -16,7 +16,7 @@ import { useRouter } from 'expo-router';
 export default function ForYou() {
   const chosen_career = "Game Development"
   const router = useRouter();
-  const careers_info = {"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
+  const [careers_info,setCareersInfo] = useState(null)
   const [qualifications,setQualifications] = useState([]);
   const [user_interests,setUserInterests] = useState<any>(null);
   const [pagenum,setPageNum] = useState(1);
@@ -26,7 +26,6 @@ export default function ForYou() {
   const [searchtext,setSearchText] = useState("");
   const getqualifications =async () => {
 
-  console.log(pagenum)
   const access_token = await AsyncStorage.getItem("access_token");
   const config = {
     headers: { Authorization: `Bearer ${access_token}` }
@@ -44,6 +43,25 @@ export default function ForYou() {
       setAtEnd(true)
     }
 
+  }
+  const getfiltercareers =async (industry="") => {
+    console.log(user_interests,"Hi")
+    let offset = pagenum === 1 ? 1 : pagenum * 8 
+    const query = industry !== "" ? industry : user_interests.industry
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
+    let result = response.data
+    if ("filters" in result){
+      console.log(result)
+      setCareersInfo(result["filters"])
+    }
+    else if ("error" in result){
+      Alert.alert(result.error)
+    }
+    else if ("offsetend" in result){
+      setAtEnd(true)
+    }
+    
+    
   }
   const searchqualifications =async () => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
@@ -69,14 +87,18 @@ export default function ForYou() {
   };
     const responseinterests = await axios.get("http://172.20.10.3:8080/api/v1/getuserinterests",config)
     let resultinterests = responseinterests.data
+    getfiltercareers(resultinterests.industry)
     setUserInterests(resultinterests)
   }
   useEffect(() =>{
     getuserinterests()
+   
   },[])
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
+      getfiltercareers()
+      
     }
     else{
       const timer = setTimeout(() =>{
@@ -88,6 +110,7 @@ export default function ForYou() {
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
+      
     }
   },[searchtext])
     const changepage = () =>{
@@ -139,7 +162,7 @@ export default function ForYou() {
         },
       ]}>
       {qualifications.length !== 0 &&<Search setSearchText={setSearchText} searchqualifications={searchqualifications} style={{flex: 0.3, backgroundColor: 'white'}} />}
-
+      {qualifications.length !== 0 && careers_info !== null &&<FilterCarousel careers={careers_info} setQualifications={setQualifications} style={{flex: 0.20, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 && user_interests !== null &&
                 <View style={{flex:0.23,marginTop:10}} >
                   <Text style={{fontWeight:"bold",fontSize:20}}>{user_interests.careers_label}</Text>
