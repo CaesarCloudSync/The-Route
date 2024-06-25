@@ -4,6 +4,7 @@ import { Button } from "react-native";
 import { useState } from "react";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 export default function CreateAccountFields({index,createaccountdata,accountdatalabel,accountdatavalue,setCreateAccountData}:any){
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -48,7 +49,7 @@ export default function CreateAccountFields({index,createaccountdata,accountdata
         />
 
         <View style={{}}>
-        <Text style={{right:"10%"}}>Logo</Text>
+        <MaterialIcons name="person" size={20} color={index % 2 === 1 ? "#61edae":"black"}  />
 
 
         </View>

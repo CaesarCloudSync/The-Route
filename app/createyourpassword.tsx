@@ -3,7 +3,7 @@ import { FlatList, View,Text,Image, Alert } from 'react-native';
 import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import { Feather } from '@expo/vector-icons';
 import Header from '@/components/header/header';
 import NavigationFooter from './footer';
 import { StatusBar } from 'expo-status-bar';
@@ -39,7 +39,7 @@ export default function CreateYourPassword() {
             //console.log(final_signup_json)
             //console.log(interests_info)
               
-            const response = await axios.post("http://192.168.0.12:8080/api/v1/signupapi",final_signup_json)
+            const response = await axios.post("http://172.20.10.3:8080/api/v1/signupapi",final_signup_json)
 
             let resultsignup = response.data
             console.log(resultsignup)
@@ -49,7 +49,7 @@ export default function CreateYourPassword() {
                 const config = {
                     headers: { Authorization: `Bearer ${access_token}` }
                 };
-                const responsestore = await axios.post("http://192.168.0.12:8080/api/v1/storeuserinterests",final_interests_info,config)
+                const responsestore = await axios.post("http://172.20.10.3:8080/api/v1/storeuserinterests",final_interests_info,config)
                 let result = responsestore.data
           
 
@@ -95,7 +95,7 @@ if (netInfo.isInternetReachable === true  ){
         <StatusBar  hidden/>
         <View style={{flex:0.03}}>
             <TouchableOpacity onPress={() =>{navigate.goBack()}}>
-            <Text>Back</Text>
+            <Feather name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
 
         </View>

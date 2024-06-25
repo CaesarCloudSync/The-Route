@@ -24,12 +24,12 @@ export default function Index() {
             const config = {
                 headers: { Authorization: `Bearer ${access_token}` }
             };
-            const response = await axios.get("http://192.168.0.12:8080/api/v1/getuserinfo",config)
+            const response = await axios.get("http://172.20.10.3:8080/api/v1/getuserinfo",config)
             let result = response.data
             console.log(result)
             if ("error" in result){
                 if (result.error.includes("does not exist")){
-
+                   
                 }
                 else{
                     Alert.alert(result.error)

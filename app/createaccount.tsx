@@ -14,7 +14,7 @@ import { useRouter } from 'expo-router';
 import { TextInput } from 'react-native';
 import { useNavigation } from 'expo-router';
 import CreateAccountFields from '@/components/createaccountcomponents/createaccountfields';
-
+import { Feather } from '@expo/vector-icons';
 export default function CreatAccount() {
     const netInfo = useNetInfo();
     const router = useRouter();
@@ -43,7 +43,7 @@ if (netInfo.isInternetReachable === true  ){
         <StatusBar  hidden/>
         <View style={{flex:0.03}}>
             <TouchableOpacity onPress={() =>{navigate.goBack()}}>
-            <Text>Back</Text>
+            <Feather name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
 
         </View>

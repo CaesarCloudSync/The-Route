@@ -3,7 +3,7 @@ import { FlatList, View,Text,Image, Alert } from 'react-native';
 import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import { Feather } from '@expo/vector-icons';
 import Header from '@/components/header/header';
 import NavigationFooter from './footer';
 import { StatusBar } from 'expo-status-bar';
@@ -53,7 +53,7 @@ export default function IndustryChoices() {
     }
     
 const getindustrychoices =async () => {
-    const response = await axios.get("http://192.168.0.12:8080/api/v1/getindustrychoices")
+    const response = await axios.get("http://172.20.10.3:8080/api/v1/getindustrychoices")
     let result = response.data
     let careers = result.careers
     let industrys = result.industrys
@@ -75,7 +75,7 @@ if (netInfo.isInternetReachable === true  ){
         <StatusBar  hidden/>
         <View style={{flex:0.03}}>
             <TouchableOpacity onPress={() =>{navigate.goBack()}}>
-            <Text>Back</Text>
+            <Feather name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
 
         </View>

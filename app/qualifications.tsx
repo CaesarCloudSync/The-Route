@@ -26,7 +26,7 @@ export default function QualificationsScreen() {
   const [searchtext,setSearchText] = useState("");
   const searchqualifications =async () => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://192.168.0.12:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
     let result = response.data
     //console.log(result)
     if ("qualifications" in result){
@@ -48,7 +48,7 @@ export default function QualificationsScreen() {
 
   //console.log(pagenum)
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://192.168.0.12:8080/api/v1/getqualifications?offset=${offset}`)
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/getqualifications?offset=${offset}`)
     let result = response.data
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
@@ -134,7 +134,7 @@ export default function QualificationsScreen() {
       <View style={{flex:0.15,justifyContent:"center",alignItems:"center",marginTop:10}} >
         <View style={{flexDirection:"row",gap:20}}>
           <TouchableOpacity style={{top:5,width:30}} onPress={() =>{navleft()}}>
-          <Feather name="arrow-left" size={18} color="black" />
+          <Feather name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
           {pagecarousel.map((index) =>{
                       return( <TouchableOpacity onPress={() =>{navpick(index+ pagenum)}} style={{backgroundColor:index+ pagenum === pagenum ? "#61edae" :"transparent",borderRadius:3,padding:5}}>
