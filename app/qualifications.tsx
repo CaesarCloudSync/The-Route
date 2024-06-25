@@ -25,8 +25,8 @@ export default function QualificationsScreen() {
   const [atend,setAtEnd] = useState(false);
   const [searchtext,setSearchText] = useState("");
   const searchqualifications =async () => {
-    let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    //let offset = pagenum === 1 ? 1 : pagenum * 8 
+    const response= await axios.get(`http://172.20.10.3:8080/api/v1/searchqualifications?text=${searchtext}`)
     let result = response.data
     //console.log(result)
     if ("qualifications" in result){
