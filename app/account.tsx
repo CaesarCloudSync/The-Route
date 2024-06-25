@@ -30,7 +30,20 @@ export default function Account(){
     useEffect(() =>{
         getaccountinfo()
     },[bookmarkchanged])
-    const deletaccount = async () => {
+    const deleteaccount = async () => {
+        const access_token = await AsyncStorage.getItem("access_token");
+        const config = {
+          headers: { Authorization: `Bearer ${access_token}` }
+      };
+        const response = await axios.delete("http://172.20.10.3:8080/api/v1/deleteuser",config)
+        let result = response.data
+        if ("message" in result){
+            await AsyncStorage.removeItem("access_token")
+            router.push("/")
+        }
+        else{
+            Alert.alert(result.error)
+        }
         
     }
     const propmptdeleteaccount =async () => {
@@ -38,7 +51,7 @@ export default function Account(){
             'Delete Account',
             'This is unreversable!!!', // <- this part is optional, you can pass an empty string
             [
-              {text: 'Yes', onPress: () => console.log('OK Pressed')},
+              {text: 'Yes', onPress: () => {deleteaccount()}},
               {text: 'Cancel', onPress: () => {}}
             ],
             {cancelable: false},
@@ -83,11 +96,17 @@ export default function Account(){
         }}>
             
         </FlatList>}
-
+        <View style={{alignSelf:"center",flexDirection:"row",gap:20}}>
         {account_info !== null &&
-        <TouchableOpacity onPress={() =>{logout()}} style={{flex:0.1,backgroundColor:"grey",width:100,height:50,justifyContent:"center",alignItems:"center",borderRadius:10,alignSelf:"center"}}>
+        <TouchableOpacity onPress={() =>{logout()}} style={{backgroundColor:"grey",width:100,height:50,justifyContent:"center",alignItems:"center",borderRadius:10}}>
         <Text style={{color:"white"}}>Log Out</Text>    
         </TouchableOpacity>}
+        {account_info !== null &&
+        <TouchableOpacity onPress={() =>{propmptdeleteaccount()}} style={{backgroundColor:"red",width:100,height:50,justifyContent:"center",alignItems:"center",borderRadius:10,padding:5}}>
+        <Text style={{color:"white"}}>Delete Account</Text>    
+        </TouchableOpacity>}
+        </View>
+
         {account_info !== null &&
         <NavFooter currentpage={"account"} style={{flex:0.13}}/>}
 
