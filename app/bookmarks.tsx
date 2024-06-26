@@ -6,8 +6,10 @@ import MainBody from "@/components/qualificationscomponents/mainbody";
 import { useNavigation } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import NavFooter from "@/components/navfooter/navfooter";
+import { useNetInfo } from '@react-native-community/netinfo';
 export default function BookMarks(){
     const navigation = useNavigation();
+    const netInfo = useNetInfo();
     const [bookmarked_quals,setBookMarkedQuals] = useState([]);
     const [bookmarkchanged,setBookMarkChanged] = useState(false)
     const getbookmarkedquals =async () => {
@@ -27,8 +29,11 @@ export default function BookMarks(){
     }
 
     useEffect(() =>{
-        getbookmarkedquals()
-    },[bookmarkchanged])
+        if (netInfo.isInternetReachable === true){
+            getbookmarkedquals()
+        }
+    },[bookmarkchanged,netInfo])
+    if (netInfo.isInternetReachable === true){
     return(
         <View style={{flex:1,padding:20}}>
 
@@ -43,4 +48,28 @@ export default function BookMarks(){
         <NavFooter currentpage={"bookmarks"} style={{flex:0.13}}/>
         </View>
     )
+}
+else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+    return(
+        <View style={{flex:1}}>
+            {/*Header */}
+
+            {/* No Internet Main Body */}
+            <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
+                <Text style={{fontSize:30,color:"black"}}>No Internet Connection</Text>
+                <Text>Please connect to enjoy your journey</Text>
+
+            </View>
+            
+
+
+
+            {/*Navigation Footer*/}
+            <NavFooter currentpage={"bookmarks"}/>
+
+        </View>
+    )
+}
+
+
 }

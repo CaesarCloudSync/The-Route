@@ -6,8 +6,10 @@ import MainBody from "@/components/qualificationscomponents/mainbody";
 import { useRouter, useNavigation } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import NavFooter from "@/components/navfooter/navfooter";
+import { useNetInfo } from '@react-native-community/netinfo';
 export default function Account(){
     const router = useRouter();
+    const netInfo = useNetInfo();
     const navigation = useNavigation();
     const [account_info,setAccountInfo] = useState(null);
     const [bookmarkchanged,setBookMarkChanged] = useState(false)
@@ -28,8 +30,10 @@ export default function Account(){
     }
 
     useEffect(() =>{
-        getaccountinfo()
-    },[bookmarkchanged])
+        if (netInfo.isInternetReachable === true){
+            getaccountinfo()
+        }
+    },[bookmarkchanged,netInfo])
     const deleteaccount = async () => {
         const access_token = await AsyncStorage.getItem("access_token");
         const config = {
@@ -66,6 +70,7 @@ export default function Account(){
     function capitalizeFirstLetter(str:string) {
         return str[0].toUpperCase() + str.slice(1);
       }
+      if (netInfo.isInternetReachable === true){ 
     return(
         <View style={{flex:1,padding:20}}>
 
@@ -113,5 +118,26 @@ export default function Account(){
 
 
         </View>
-    )
+    )}
+    else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+        return(
+            <View style={{flex:1}}>
+                {/*Header */}
+    
+                {/* No Internet Main Body */}
+                <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
+                    <Text style={{fontSize:30,color:"black"}}>No Internet Connection</Text>
+                    <Text>Please connect to enjoy your journey</Text>
+    
+                </View>
+                
+    
+    
+    
+                {/*Navigation Footer*/}
+                <NavFooter currentpage={"account"}/>
+    
+            </View>
+        )
+    }
 }

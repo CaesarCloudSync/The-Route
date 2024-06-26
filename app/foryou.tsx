@@ -12,9 +12,10 @@ import axios from 'axios';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-
+import { useNetInfo } from '@react-native-community/netinfo';
 export default function ForYou() {
   const chosen_career = "Game Development"
+  const netInfo = useNetInfo();
   const router = useRouter();
   const [careers_info,setCareersInfo] = useState(null)
   const [qualifications,setQualifications] = useState([]);
@@ -95,18 +96,21 @@ export default function ForYou() {
    
   },[])
   useEffect(() =>{
-    if (searchtext.length === 0){
-      getqualifications()
-      getfiltercareers()
-      
+    if (netInfo.isInternetReachable === true){
+      if (searchtext.length === 0){
+        getqualifications()
+        getfiltercareers()
+        
+      }
+      else{
+        const timer = setTimeout(() =>{
+          searchqualifications()
+        },500)
+        return () => clearTimeout(timer);
+      }
     }
-    else{
-      const timer = setTimeout(() =>{
-        searchqualifications()
-      },500)
-      return () => clearTimeout(timer);
-    }
-  },[pagechanged])
+
+  },[pagechanged,netInfo])
   useEffect(() =>{
     if (searchtext.length === 0){
       getqualifications()
@@ -151,6 +155,7 @@ export default function ForYou() {
 
   }
   //const qualifications = [{"qual_name":"Game Development","link":"https://croydon.ac.uk/","description":description,"qual_icon":"https://qual_icon","qualuuid":"qual-1234","institution":"Croydon College","online_freq":"Online 2 days a week","in_person_freq":"In Person 1 day a week","course_length":"2 years study","earning_potential_lower":"60k","earning_potential_upper":"180K","earning_potential_description":"no experience needed"},{"qualuuid":"qual-1234","institution":"GAMES ARE US","link":"https://www.universitygames.com/","description":description,"online_freq":"Online 4 days a week","in_person_freq":"","course_length":"18 months study","qual_name":"Game Designer","qual_icon":"https://qual_icon","earning_potential_lower":"75k","earning_potential_upper":"120K","earning_potential_description":"3 months training provided before job offer"},{"qualuuid":"qual-1234","institution":"GAMES . STUDY","link":"https://classmaster.io/learning-games/online-games-for-studying/","description":description,"online_freq":"2 days a week","in_person_freq":"In person 3 days a week","course_length":"18 months study","qual_name":"Game Content Creator","qual_icon":"https://qual_icon","earning_potential_lower":"60k","earning_potential_upper":"80K","earning_potential_description":"full stack developer"}]
+  if (netInfo.isInternetReachable === true){
   return (
     <View
       style={[
@@ -191,7 +196,29 @@ export default function ForYou() {
       {qualifications.length !== 0 && <MainBody qualifications={qualifications} style={{flex: 3, backgroundColor: 'white'}} />}
       {qualifications.length !== 0 &&<NavFooter currentpage={"foryou"} style={{flex:0.13}}/>}
     </View>
-  );
+  );}
+  else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+    return(
+        <View style={{flex:1}}>
+            {/*Header */}
+
+            {/* No Internet Main Body */}
+            <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
+                <Text style={{fontSize:30,color:"black"}}>No Internet Connection</Text>
+                <Text>Please connect to enjoy your journey</Text>
+
+            </View>
+            
+
+
+
+            {/*Navigation Footer*/}
+            <NavFooter currentpage={"foryou"}/>
+
+        </View>
+    )
+}
+
 }
 const styles = StyleSheet.create({
   container: {
