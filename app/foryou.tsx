@@ -57,6 +57,7 @@ export default function ForYou() {
   }
   const getfiltercareers =async (industry="") => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
+    console.log(user_interests.industry,industry)
     const query = industry !== "" ? industry : user_interests.industry
     const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
     let result = response.data
@@ -112,7 +113,10 @@ export default function ForYou() {
 
         const timer = setTimeout(() =>{
           getqualifications()
-          getfiltercareers()
+          console.log(user_interests)
+          if (user_interests !== null){
+            getfiltercareers()
+          }
           },300)
           return () => clearTimeout(timer);
         

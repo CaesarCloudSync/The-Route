@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import PulseEffect from "./transitionanimation";
+import NavFooter from "../navfooter/navfooter";
 export default function TransitionPage({currentpage}:any){
     if (currentpage === "home" || currentpage === "foryou"){
       return(
@@ -51,8 +52,9 @@ export default function TransitionPage({currentpage}:any){
           <PulseEffect width={300} height={100} borderRadius={5} color={"#b9bcc3"}></PulseEffect>
     
           </View>
-  
+          <NavFooter currentpage={currentpage} />
         </View>
+       
     )
     }
     else if (currentpage === "bookmarks" || currentpage === "account"){
@@ -93,6 +95,7 @@ export default function TransitionPage({currentpage}:any){
           <PulseEffect width={300} height={100} borderRadius={5} color={"#b9bcc3"}></PulseEffect>
     
           </View>
+          <NavFooter currentpage={currentpage} />
 
   
         </View>
