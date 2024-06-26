@@ -23,7 +23,7 @@ export default function Index() {
             const config = {
                 headers: { Authorization: `Bearer ${access_token}` }
             };
-            const response = await axios.get("http://192.168.0.28:8080/api/v1/getuserinfo",config)
+            const response = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinfo",config)
             let result = response.data
             console.log(result)
             if ("error" in result){

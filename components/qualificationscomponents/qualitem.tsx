@@ -22,7 +22,7 @@ export default function QualItem({qualification,bookmarkchanged,setBookMarkChang
           headers: { Authorization: `Bearer ${access_token}` }
       };
       const qual_uuid = qualification.qual_uuid
-      const response = await axios.post("http://192.168.0.28:8080/api/v1/storequalificationbookmark",{"qual_uuid":qual_uuid},config)
+      const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/storequalificationbookmark",{"qual_uuid":qual_uuid},config)
       let result = response.data
       if (!("message" in result)){
         Alert.alert(result.error)
@@ -40,7 +40,7 @@ export default function QualItem({qualification,bookmarkchanged,setBookMarkChang
               headers: { Authorization: `Bearer ${access_token}` }
           };
             const qual_uuid = qualification.qual_uuid
-            const response = await axios.delete(`http://192.168.0.28:8080/api/v1/removequalificationbookmark?qual_uuid=${qual_uuid}`,config)
+            const response = await axios.delete(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/removequalificationbookmark?qual_uuid=${qual_uuid}`,config)
             let result = response.data
           if (bookmarkchanged === true){
             setBookMarkChanged(false)

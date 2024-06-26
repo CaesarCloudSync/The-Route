@@ -52,7 +52,7 @@ export default function IndustryChoices() {
     }
     
 const getindustrychoices =async () => {
-    const response = await axios.get("http://192.168.0.28:8080/api/v1/getindustrychoices")
+    const response = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getindustrychoices")
     let result = response.data
     let careers = result.careers
     let industrys = result.industrys
