@@ -35,11 +35,20 @@ export default function ForYou() {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const response= await axios.get(`http://192.168.0.28:8080/api/v1/getuserinterestqualifications?offset=${offset}`,config)
     let result = response.data
+    //console.log(result)
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
     }
     else if ("error" in result){
-      Alert.alert(result.error)
+      if (result.error.includes("no qualifications exist in the database.")){
+        const response= await axios.get(`http://192.168.0.28:8080/api/v1/getqualifications?offset=${offset}`)
+        let result = response.data
+        setQualifications(result["qualifications"])
+
+      }
+      else{
+        Alert.alert(result.error)
+      }
     }
     else if ("offsetend" in result){
       setAtEnd(true)

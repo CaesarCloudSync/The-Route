@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import Header from '@/components/header/header';
+
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNetInfo } from '@react-native-community/netinfo';

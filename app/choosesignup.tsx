@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import Header from '@/components/header/header';
+
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -46,7 +46,7 @@ if (netInfo.isInternetReachable === true  ){
                     <Text style={{color:"white"}}>I already have an account</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() =>{router.push("/createaccount")}}   style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:50,alignSelf:"center"}}>
-                    <Text style={{color:"white"}}>Create my Account</Text>
+                    <Text style={{color:"black"}}>Create my account</Text>
             </TouchableOpacity>
 
         </View>

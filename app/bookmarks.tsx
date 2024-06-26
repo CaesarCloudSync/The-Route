@@ -38,12 +38,7 @@ export default function BookMarks(){
             return () => clearTimeout(timer);
         }
     },[bookmarkchanged,netInfo])
-    if (netInfo.isInternetReachable === true && bookmarked_quals.length === 0){
-        return(
-          <TransitionPage currentpage={"bookmarks"}/>
-          
-        )
-      }
+
     if (netInfo.isInternetReachable === true){
     return(
         <View style={{flex:1,padding:20}}>
