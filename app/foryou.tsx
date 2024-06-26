@@ -46,7 +46,6 @@ export default function ForYou() {
 
   }
   const getfiltercareers =async (industry="") => {
-    console.log(user_interests,"Hi")
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const query = industry !== "" ? industry : user_interests.industry
     const response= await axios.get(`http://192.168.0.28:8080/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
@@ -92,9 +91,11 @@ export default function ForYou() {
     setUserInterests(resultinterests)
   }
   useEffect(() =>{
-    getuserinterests()
+    if (netInfo.isInternetReachable === true){
+      getuserinterests()
+    }
    
-  },[])
+  },[netInfo])
   useEffect(() =>{
     if (netInfo.isInternetReachable === true){
       if (searchtext.length === 0){
@@ -113,10 +114,12 @@ export default function ForYou() {
   },[pagechanged,netInfo])
   useEffect(() =>{
     if (searchtext.length === 0){
-      getqualifications()
+      if (netInfo.isInternetReachable === true){
+        getqualifications()
+      }
       
     }
-  },[searchtext])
+  },[searchtext,netInfo])
     const changepage = () =>{
       if (pagechanged === true){
         setPageChanged(false)
@@ -197,7 +200,7 @@ export default function ForYou() {
       {qualifications.length !== 0 &&<NavFooter currentpage={"foryou"} style={{flex:0.13}}/>}
     </View>
   );}
-  else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+  else if (netInfo.isInternetReachable === false){
     return(
         <View style={{flex:1}}>
             {/*Header */}

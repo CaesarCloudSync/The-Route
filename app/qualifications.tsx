@@ -177,7 +177,7 @@ export default function QualificationsScreen() {
     </View>
   );
 }
-else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+else if (netInfo.isInternetReachable === false){
   return(
       <View style={{flex:1}}>
           {/*Header */}

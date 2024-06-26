@@ -43,7 +43,7 @@ export default function Account(){
         let result = response.data
         if ("message" in result){
             await AsyncStorage.removeItem("access_token")
-            router.push("/")
+            router.push("/getstarted")
         }
         else{
             Alert.alert(result.error)
@@ -119,7 +119,7 @@ export default function Account(){
 
         </View>
     )}
-    else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+    else if (netInfo.isInternetReachable === false){
         return(
             <View style={{flex:1}}>
                 {/*Header */}

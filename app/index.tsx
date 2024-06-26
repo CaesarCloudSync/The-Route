@@ -14,7 +14,6 @@ import { useRouter } from 'expo-router';
 export default function Index() {
     const netInfo = useNetInfo();
     const router = useRouter();
-    const [isLoggedIn,setIsLoggedIn] = useState(false)
     const check_loggeed_in =async () => {
         //await AsyncStorage.removeItem("access_token")
         const access_token = await AsyncStorage.getItem("access_token");
@@ -29,6 +28,7 @@ export default function Index() {
             console.log(result)
             if ("error" in result){
                 if (result.error.includes("does not exist")){
+                    router.push("/getstarted")
                    
                 }
                 else{
@@ -37,14 +37,15 @@ export default function Index() {
             }
             else{
                 router.push("/qualifications")
-                setIsLoggedIn(true)
+              
             }
             
             //router.push("/mainhome")
             
         }
         else{
-            setIsLoggedIn(false);
+        
+            router.push("/getstarted")
             
         }
     }
@@ -57,35 +58,16 @@ useEffect(() =>{
     }
     
 },[netInfo])
-if (netInfo.isInternetReachable === true && !isLoggedIn){
+
+if (netInfo.isInternetReachable === true ){
   return (
-    <View style={{flex:1,backgroundColor:"white"}}>
-        <StatusBar  hidden/>
-        <View style={{flex:1,padding:30,alignItems:"center",gap:30}}>
-            <View style={{marginTop:"20%"}}>
-                <Text style={{fontSize:25}}>The Route</Text>
-            </View>
-            <View style={{padding:20,borderRadius:5}}>
-                <Image alt='Image Here' style={{width:300,height:125}} source={{uri:"https://btdmembership.com/wp-content/uploads/2024/03/BTD-Logo-3-1024x446.png"}}></Image>
-            </View>
-            <View>
-                <Text style={{fontSize:20}}>Expand Your future</Text>
-            </View>
-
-        </View>
-        <View style={{flex:0.3,justifyContent:"center",alignItems:"center"}}>
-            <TouchableOpacity onPress={() =>{router.push("/choosesignup")}} style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:5}}>
-                    <Text style={{color:"white"}}>Get Started</Text>
-            </TouchableOpacity>
-
-        </View>
-
-  
+    <View>
 
     </View>
+
   );
 }
-else if (netInfo.isInternetReachable === null || netInfo.isInternetReachable === false){
+else if (netInfo.isInternetReachable === false){
     return(
         <View style={{flex:1}}>
             {/*Header */}
