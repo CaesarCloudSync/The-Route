@@ -83,7 +83,7 @@ else if (netInfo.isInternetReachable === false){
 
 
             {/*Navigation Footer*/}
-            <NavFooter currentpage={"home"}/>
+       
 
         </View>
     )

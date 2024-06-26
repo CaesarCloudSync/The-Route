@@ -5,12 +5,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import Header from '@/components/header/header';
-import NavigationFooter from './footer';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+
 export default function Index() {
     const netInfo = useNetInfo();
     const router = useRouter();
@@ -57,27 +57,15 @@ if (netInfo.isInternetReachable === true  ){
     </View>
   );
 }
-else if (netInfo.isInternetReachable === null){
-    return(
-        <View style={{flex:1,backgroundColor:"white"}}>
-        <StatusBar  hidden/>
-        <Header style={{flex:1}}/>
-        {<View style={{flex:1}}></View>}
-        <NavigationFooter currentpage={"home"}></NavigationFooter>
-
-  
-
-    </View>
-    )
-}
 else if (netInfo.isInternetReachable === false){
     return(
         <View style={{flex:1}}>
             {/*Header */}
-            <Header style={{flex:1}}/>
+            
             {/* No Internet Main Body */}
             <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
-                <Text style={{fontSize:30,color:"white"}}>No Internet Connection</Text>
+                <Text style={{fontSize:30,color:"black"}}>No Internet Connection</Text>
+                <Text>Please connect to enjoy your journey</Text>
 
             </View>
             
@@ -85,10 +73,9 @@ else if (netInfo.isInternetReachable === false){
 
 
             {/*Navigation Footer*/}
-            <NavigationFooter currentpage={"home"}/>
+    
 
         </View>
     )
-    
 }
 }

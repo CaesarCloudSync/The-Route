@@ -1,8 +1,11 @@
 import { View,StatusBar,TouchableOpacity,Image,Text} from "react-native"
 import { useRouter } from "expo-router"
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function GetStarted(){
-    const router = useRouter()
+    const router = useRouter();
+    const netInfo = useNetInfo();
+    if (netInfo.isInternetReachable === true){
     return(
         <View style={{flex:1,backgroundColor:"white"}}>
         <StatusBar  hidden/>
@@ -20,7 +23,7 @@ export default function GetStarted(){
         </View>
         <View style={{flex:0.3,justifyContent:"center",alignItems:"center"}}>
             <TouchableOpacity onPress={() =>{router.push("/choosesignup")}} style={{backgroundColor:"#61edae",width:"90%",justifyContent:"center",alignItems:"center",padding:20,borderRadius:5}}>
-                    <Text style={{color:"white"}}>Get Started</Text>
+                    <Text style={{color:"black"}}>Get Started</Text>
             </TouchableOpacity>
 
         </View>
@@ -28,5 +31,26 @@ export default function GetStarted(){
   
 
     </View>
-    )
+    )}
+    else if (netInfo.isInternetReachable === false){
+        return(
+            <View style={{flex:1}}>
+                {/*Header */}
+                
+                {/* No Internet Main Body */}
+                <View style={{flex:1,backgroundColor:"white",justifyContent:"center",alignItems:"center"}}>
+                    <Text style={{fontSize:30,color:"black"}}>No Internet Connection</Text>
+                    <Text>Please connect to enjoy your journey</Text>
+    
+                </View>
+                
+    
+    
+    
+                {/*Navigation Footer*/}
+        
+    
+            </View>
+        )
+    }
 }
