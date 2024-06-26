@@ -72,7 +72,7 @@ export default function TransitionPage({currentpage}:any){
           },
         ]}>
           <View style={{flex: 0.03,alignSelf:"flex-start"}}>
-          <PulseEffect width={300} height={30} borderRadius={5} color={"#b9bcc3"}></PulseEffect>
+          <PulseEffect width={350} height={30} borderRadius={5} color={"#b9bcc3"}></PulseEffect>
     
           </View>
           <View style={{flex: 0.2,alignSelf:"flex-start"}}>
