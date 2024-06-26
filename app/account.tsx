@@ -7,6 +7,7 @@ import { useRouter, useNavigation } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import NavFooter from "@/components/navfooter/navfooter";
 import { useNetInfo } from '@react-native-community/netinfo';
+import TransitionPage from "@/components/transitionanimation/transitionpage";
 export default function Account(){
     const router = useRouter();
     const netInfo = useNetInfo();
@@ -30,8 +31,12 @@ export default function Account(){
     }
 
     useEffect(() =>{
-        if (netInfo.isInternetReachable === true){
+        if (netInfo.isInternetReachable === true){      
+        const timer = setTimeout(() =>{
             getaccountinfo()
+            },300)
+            return () => clearTimeout(timer);
+            
         }
     },[bookmarkchanged,netInfo])
     const deleteaccount = async () => {
@@ -69,6 +74,13 @@ export default function Account(){
     }
     function capitalizeFirstLetter(str:string) {
         return str[0].toUpperCase() + str.slice(1);
+      }
+    
+    if (netInfo.isInternetReachable === true && account_info === null){
+        return(
+          <TransitionPage currentpage={"account"}/>
+          
+        )
       }
       if (netInfo.isInternetReachable === true){ 
     return(

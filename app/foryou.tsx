@@ -13,6 +13,7 @@ import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useNetInfo } from '@react-native-community/netinfo';
+import TransitionPage from '@/components/transitionanimation/transitionpage';
 export default function ForYou() {
   const chosen_career = "Game Development"
   const netInfo = useNetInfo();
@@ -51,7 +52,7 @@ export default function ForYou() {
     const response= await axios.get(`http://192.168.0.28:8080/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
     let result = response.data
     if ("filters" in result){
-      console.log(result)
+      //console.log(result)
       setCareersInfo(result["filters"])
     }
     else if ("error" in result){
@@ -99,8 +100,12 @@ export default function ForYou() {
   useEffect(() =>{
     if (netInfo.isInternetReachable === true){
       if (searchtext.length === 0){
-        getqualifications()
-        getfiltercareers()
+
+        const timer = setTimeout(() =>{
+          getqualifications()
+          getfiltercareers()
+          },300)
+          return () => clearTimeout(timer);
         
       }
       else{
@@ -111,15 +116,8 @@ export default function ForYou() {
       }
     }
 
-  },[pagechanged,netInfo])
-  useEffect(() =>{
-    if (searchtext.length === 0){
-      if (netInfo.isInternetReachable === true){
-        getqualifications()
-      }
-      
-    }
-  },[searchtext,netInfo])
+  },[searchtext,pagechanged,netInfo])
+
     const changepage = () =>{
       if (pagechanged === true){
         setPageChanged(false)
@@ -156,6 +154,12 @@ export default function ForYou() {
       }
 
 
+  }
+  if (netInfo.isInternetReachable === true && qualifications.length === 0){
+    return(
+      <TransitionPage currentpage={"foryou"}/>
+      
+    )
   }
   //const qualifications = [{"qual_name":"Game Development","link":"https://croydon.ac.uk/","description":description,"qual_icon":"https://qual_icon","qualuuid":"qual-1234","institution":"Croydon College","online_freq":"Online 2 days a week","in_person_freq":"In Person 1 day a week","course_length":"2 years study","earning_potential_lower":"60k","earning_potential_upper":"180K","earning_potential_description":"no experience needed"},{"qualuuid":"qual-1234","institution":"GAMES ARE US","link":"https://www.universitygames.com/","description":description,"online_freq":"Online 4 days a week","in_person_freq":"","course_length":"18 months study","qual_name":"Game Designer","qual_icon":"https://qual_icon","earning_potential_lower":"75k","earning_potential_upper":"120K","earning_potential_description":"3 months training provided before job offer"},{"qualuuid":"qual-1234","institution":"GAMES . STUDY","link":"https://classmaster.io/learning-games/online-games-for-studying/","description":description,"online_freq":"2 days a week","in_person_freq":"In person 3 days a week","course_length":"18 months study","qual_name":"Game Content Creator","qual_icon":"https://qual_icon","earning_potential_lower":"60k","earning_potential_upper":"80K","earning_potential_description":"full stack developer"}]
   if (netInfo.isInternetReachable === true){

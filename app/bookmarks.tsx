@@ -7,6 +7,7 @@ import { useNavigation } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import NavFooter from "@/components/navfooter/navfooter";
 import { useNetInfo } from '@react-native-community/netinfo';
+import TransitionPage from "@/components/transitionanimation/transitionpage";
 export default function BookMarks(){
     const navigation = useNavigation();
     const netInfo = useNetInfo();
@@ -30,9 +31,19 @@ export default function BookMarks(){
 
     useEffect(() =>{
         if (netInfo.isInternetReachable === true){
+            
+        const timer = setTimeout(() =>{
             getbookmarkedquals()
+            },300)
+            return () => clearTimeout(timer);
         }
     },[bookmarkchanged,netInfo])
+    if (netInfo.isInternetReachable === true && bookmarked_quals.length === 0){
+        return(
+          <TransitionPage currentpage={"bookmarks"}/>
+          
+        )
+      }
     if (netInfo.isInternetReachable === true){
     return(
         <View style={{flex:1,padding:20}}>

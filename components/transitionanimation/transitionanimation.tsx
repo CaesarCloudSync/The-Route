@@ -9,12 +9,12 @@ const PulseEffect = ({width=100,height=100,color,borderRadius=10}:any) => {
       Animated.sequence([
         Animated.timing(scaleValue, {
           toValue: 1.10,
-          duration: 1000,
+          duration: 300,
           useNativeDriver: true,
         }),
         Animated.timing(scaleValue, {
           toValue: 1,
-          duration: 1000,
+          duration: 300,
           useNativeDriver: true,
         }),
       ])
@@ -25,6 +25,7 @@ const PulseEffect = ({width=100,height=100,color,borderRadius=10}:any) => {
     return () => {
       pulseAnimation.stop();
     };
+    
   }, [scaleValue]);
 
   return (

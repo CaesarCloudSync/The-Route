@@ -12,11 +12,13 @@ import axios from 'axios';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import PulseEffect from '@/components/transitionanimation/transitionanimation';
 import { useNetInfo } from '@react-native-community/netinfo';
+import PulseEffect from '@/components/transitionanimation/transitionanimation';
+import TransitionPage from '@/components/transitionanimation/transitionpage';
 export default function QualificationsScreen() {
   const chosen_career = "Game Development"
   const router = useRouter();
+  const [transitoionisAnimating,setTransitionIsAnimating] = useState(false);
   const [careers_info,setCareersInfo]= useState(null); //{"filters":[{"label":"Game Development","value":"game_development"},{"label":"Python","value":"python"},{"label":"C#","value":"c#"},{"label":"Angular","value":"angular"},{"label":"C++","value":"cpp"},{"label":"Vue","value":"vue"},{"label":"Vite","value":"vite"}]}
   const [qualifications,setQualifications] = useState([]);
   const [user_interests,setUserInterests] = useState<any>(null);
@@ -80,29 +82,27 @@ export default function QualificationsScreen() {
   }
 
 
-  useEffect(() =>{
-    if (searchtext.length === 0){
-      if (netInfo.isInternetReachable === true){
-        getqualifications()
-        getfiltercareers()
-      }
 
-    }
-    else{
-    }
-  },[pagechanged,netInfo])
   useEffect(() =>{
-    if (searchtext.length === 0){
-      getqualifications()
-      //getfiltercareers()
+    if (netInfo.isInternetReachable === true){
+      if (searchtext.length === 0){
+        const timer = setTimeout(() =>{
+          getqualifications()
+          getfiltercareers()
+          },300)
+          return () => clearTimeout(timer);
+
+        //getfiltercareers()
+      }
+      else{
+        const timer = setTimeout(() =>{
+          searchqualifications()
+        },500)
+        return () => clearTimeout(timer);
+      }
     }
-    else{
-      const timer = setTimeout(() =>{
-        searchqualifications()
-      },500)
-      return () => clearTimeout(timer);
-    }
-  },[searchtext])
+
+  },[searchtext,pagechanged,netInfo])
     const changepage = () =>{
       if (pagechanged === true){
         setPageChanged(false)
@@ -138,6 +138,12 @@ export default function QualificationsScreen() {
       }
 
 
+  }
+  if (netInfo.isInternetReachable === true && qualifications.length === 0){
+    return(
+      <TransitionPage currentpage={"home"}/>
+      
+    )
   }
   //const qualifications = [{"qual_name":"Game Development","link":"https://croydon.ac.uk/","description":description,"qual_icon":"https://qual_icon","qualuuid":"qual-1234","institution":"Croydon College","online_freq":"Online 2 days a week","in_person_freq":"In Person 1 day a week","course_length":"2 years study","earning_potential_lower":"60k","earning_potential_upper":"180K","earning_potential_description":"no experience needed"},{"qualuuid":"qual-1234","institution":"GAMES ARE US","link":"https://www.universitygames.com/","description":description,"online_freq":"Online 4 days a week","in_person_freq":"","course_length":"18 months study","qual_name":"Game Designer","qual_icon":"https://qual_icon","earning_potential_lower":"75k","earning_potential_upper":"120K","earning_potential_description":"3 months training provided before job offer"},{"qualuuid":"qual-1234","institution":"GAMES . STUDY","link":"https://classmaster.io/learning-games/online-games-for-studying/","description":description,"online_freq":"2 days a week","in_person_freq":"In person 3 days a week","course_length":"18 months study","qual_name":"Game Content Creator","qual_icon":"https://qual_icon","earning_potential_lower":"60k","earning_potential_upper":"80K","earning_potential_description":"full stack developer"}]
   if (netInfo.isInternetReachable === true ){
