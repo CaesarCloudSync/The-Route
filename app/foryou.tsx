@@ -31,7 +31,7 @@ export default function ForYou() {
     headers: { Authorization: `Bearer ${access_token}` }
 };
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinterestqualifications?offset=${offset}`,config)
+    const response= await axios.get(`http://192.168.0.28:8080/api/v1/getuserinterestqualifications?offset=${offset}`,config)
     let result = response.data
     if ("qualifications" in result){
       setQualifications(result["qualifications"])
@@ -48,7 +48,7 @@ export default function ForYou() {
     console.log(user_interests,"Hi")
     let offset = pagenum === 1 ? 1 : pagenum * 8 
     const query = industry !== "" ? industry : user_interests.industry
-    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
+    const response= await axios.get(`http://192.168.0.28:8080/api/v1/getcareerfilter?offset=${offset}&industry=${query}`) //  // ${user_interests.careers_label} software
     let result = response.data
     if ("filters" in result){
       console.log(result)
@@ -65,7 +65,7 @@ export default function ForYou() {
   }
   const searchqualifications =async () => {
     let offset = pagenum === 1 ? 1 : pagenum * 8 
-    const response= await axios.get(`https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
+    const response= await axios.get(`http://192.168.0.28:8080/api/v1/searchqualifications?text=${searchtext}&offset=${offset}`)
     let result = response.data
     //console.log(result)
     if ("qualifications" in result){
@@ -85,7 +85,7 @@ export default function ForYou() {
     const config = {
       headers: { Authorization: `Bearer ${access_token}` }
   };
-    const responseinterests = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinterests",config)
+    const responseinterests = await axios.get("http://192.168.0.28:8080/api/v1/getuserinterests",config)
     let resultinterests = responseinterests.data
     getfiltercareers(resultinterests.industry)
     setUserInterests(resultinterests)

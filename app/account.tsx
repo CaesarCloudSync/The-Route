@@ -16,7 +16,7 @@ export default function Account(){
         const config = {
           headers: { Authorization: `Bearer ${access_token}` }
       };
-        const response = await axios.get("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/getuserinfo",config)
+        const response = await axios.get("http://192.168.0.28:8080/api/v1/getuserinfo",config)
         let result = response.data
         //console.log(result)
         if ("email" in result){
@@ -35,7 +35,7 @@ export default function Account(){
         const config = {
           headers: { Authorization: `Bearer ${access_token}` }
       };
-        const response = await axios.delete("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/deleteuser",config)
+        const response = await axios.delete("http://192.168.0.28:8080/api/v1/deleteuser",config)
         let result = response.data
         if ("message" in result){
             await AsyncStorage.removeItem("access_token")
