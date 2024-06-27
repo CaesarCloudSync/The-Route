@@ -7,19 +7,19 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "androidStatusBar": {
-      "backgroundColor": "white",
+      "backgroundColor": "#FFFFFF",
       "barStyle": "dark-content",
       "translucent": true,
       "hidden": false
     },
     "androidNavigationBar": {
-      "backgroundColor": "white"
+      "backgroundColor": "#FFFFFF"
     },
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "white"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": [
       "**/*"
