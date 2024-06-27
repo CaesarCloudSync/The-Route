@@ -157,7 +157,7 @@ export default function QualificationsScreen() {
           backgroundColor: 'white'
         },
       ]}>
-      {qualifications.length !== 0 &&<Search searchqualifications={searchqualifications} setSearchText={setSearchText} style={{flex: 0.3, backgroundColor: 'white'}} />}
+      {qualifications.length !== 0 &&<Search searchqualifications={searchqualifications} setSearchText={setSearchText} style={{ backgroundColor: 'white'}} />}
       {qualifications.length !== 0 && careers_info !== null &&<FilterCarousel careers={careers_info} setQualifications={setQualifications} style={{flex: 0.20, backgroundColor: 'white'}} />}
       
       {qualifications.length !== 0 && 
