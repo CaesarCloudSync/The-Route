@@ -14,7 +14,7 @@ export default function GetStarted(){
                 <Text style={{fontSize:25}}>The Route</Text>
             </View>
             <View style={{padding:20,borderRadius:5}}>
-                <Image alt='Image Here' style={{width:300,height:125}} source={{uri:"https://btdmembership.com/wp-content/uploads/2024/03/BTD-Logo-3-1024x446.png"}}></Image>
+                <Image alt='Image Here' style={{width:200,height:200,borderRadius:10}} source={require("../assets/images/TheRouteLogo.png")}></Image>
             </View>
             <View>
                 <Text style={{fontSize:20}}>Expand Your future</Text>

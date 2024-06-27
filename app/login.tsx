@@ -28,7 +28,7 @@ export default function Index() {
           const response = await axios.post("https://btdtechconnectbe-hrjw5cc7pa-uc.a.run.app/api/v1/loginapi",{"email":email,"password":password})
 
           let result = response.data
-          console.log(result)
+          //console.log(result)
           if ("access_token" in result){
               await AsyncStorage.setItem("access_token",result.access_token)
               router.push("/qualifications")

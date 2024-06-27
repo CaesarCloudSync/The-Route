@@ -167,7 +167,7 @@ export default function QualificationsScreen() {
           <Feather name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
           {pagecarousel.map((index) =>{
-                      return( <TouchableOpacity onPress={() =>{navpick(index+ pagenum)}} style={{backgroundColor:index+ pagenum === pagenum ? "#61edae" :"transparent",borderRadius:3,padding:5}}>
+                      return( <TouchableOpacity key={index} onPress={() =>{navpick(index+ pagenum)}} style={{backgroundColor:index+ pagenum === pagenum ? "#61edae" :"transparent",borderRadius:3,padding:5}}>
                         <Text style={{fontWeight:"bold"}}>
                         {index + pagenum}
                         </Text></TouchableOpacity>)
